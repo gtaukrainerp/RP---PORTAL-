@@ -225,3 +225,33 @@ alert("Гравця не знайдено");
 
 </body>
 </html>
+
+// показ адмінки тільки після пароля
+function openAdmin(){
+
+const pass = document.getElementById("adminPass").value;
+
+// 🔥 ТУТ ТВОЙ ПАРОЛЬ
+if(pass === "DBR2026_SECRET"){
+
+document.getElementById("adminPanel").style.display = "block";
+
+}else{
+alert("Невірний пароль");
+}
+}
+<div class="box" id="adminBox" style="display:none">
+<h2>🛠 АДМІНКА</h2>
+
+<input id="adminPass" type="password" placeholder="Пароль">
+<button onclick="openAdmin()">Увійти</button>
+
+<div id="adminPanel" style="display:none">
+
+<input id="targetName" placeholder="Ім'я гравця">
+<input id="newRank" placeholder="Нове звання">
+
+<button onclick="changeRank()">Змінити звання</button>
+
+</div>
+</div>
