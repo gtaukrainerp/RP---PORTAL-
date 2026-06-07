@@ -228,5 +228,49 @@ if(!current.level) current.level = 1;
 
 document.getElementById("expText").innerText =
 "EXP: " + current.exp + " | Рівень: " + current.level;
+function register(){
+
+let u = {
+username: document.getElementById("username").value,
+password: document.getElementById("password").value,
+
+rank: document.getElementById("rank").value,
+badge: document.getElementById("badge").value,
+car: document.getElementById("car").value,
+telegram: document.getElementById("tg").value,
+tgname: document.getElementById("tgname").value,
+roblox: document.getElementById("roblox").value,
+
+db: 0,
+exp: 0,
+level: 1,
+bg: "green"
+};
+
+if(users.find(x => x.username === u.username)){
+alert("Вже існує");
+return;
+}
+
+users.push(u);
+save();
+
+alert("OK");
+}
+
+
+<input id="rank" placeholder="Звання">
+<input id="badge" placeholder="Жетон">
+<input id="car" placeholder="Авто">
+<input id="tg" placeholder="Telegram">
+<input id="tgname" placeholder="Тг нік">
+<input id="roblox" placeholder="Roblox">
+
+<input id="rank" placeholder="Звання">
+<input id="badge" placeholder="Жетон">
+<input id="car" placeholder="Авто">
+<input id="tg" placeholder="Telegram">
+<input id="tgname" placeholder="Тг нік">
+<input id="roblox" placeholder="Roblox">
 
 
