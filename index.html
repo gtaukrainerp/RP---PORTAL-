@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>ДБР RP PORTAL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#020a06;
+color:white;
+}
+
+header{
+text-align:center;
+padding:30px;
+background:#06321d;
+color:#00ff88;
+text-shadow:0 0 15px #00ff88;
+}
+
+.box{
+max-width:500px;
+margin:10px auto;
+padding:20px;
+background:#0a1f14;
+border:1px solid #00ff88;
+border-radius:10px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:8px;
+background:#062015;
+color:white;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#00ff88;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{box-shadow:0 0 15px #00ff88;}
+
+#portal{display:none;}
+
+.item{
+max-width:800px;
+margin:10px auto;
+border:1px solid #00ff88;
+border-radius:10px;
+overflow:hidden;
+}
+
+.title{
+padding:12px;
+background:#062a18;
+cursor:pointer;
+font-weight:bold;
+}
+
+.content{
+max-height:0;
+overflow:hidden;
+transition:0.3s;
+padding:0 15px;
+white-space:pre-wrap;
+color:#b6ffda;
+}
+
+.item.active .content{
+max-height:1500px;
+padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ДБР RP PORTAL</h1>
+</header>
+
+<!-- REGISTER -->
+<div id="auth">
+
+<div class="box">
+<h2>📝 Реєстрація</h2>
+
+<input id="name" placeholder="Ім'я">
+<input id="rank" placeholder="Звання">
+<input id="badge" placeholder="Жетон">
+<input id="car" placeholder="Авто">
+<input id="tg" placeholder="Telegram">
+
+<button onclick="register()">ЗАРЕЄСТРУВАТИСЯ</button>
+</div>
+
+</div>
+
+<!-- PORTAL -->
+<div id="portal">
+
+<div class="box">
+<h2>👮 Профіль</h2>
+
+<p><b>Ім'я:</b> <span id="p_name"></span></p>
+<p><b>Звання:</b> <span id="p_rank"></span></p>
+<p><b>Жетон:</b> <span id="p_badge"></span></p>
+<p><b>Авто:</b> <span id="p_car"></span></p>
+<p><b>Telegram:</b> <span id="p_tg"></span></p>
+</div>
+
+<!-- RULES -->
+<div class="item">
+<div class="title">📊 СИСТЕМА БАЛІВ</div>
+<div class="content">
+🏋️ +1 Тренування
+📑 +2 Документація
+💰 +3 Хабарники
+🔫 +2 Затримання
+🚓 +3 Спецоперації
+🧠 +1 Допомога
+⏱ +1 Актив
+📢 +2 Ініціатива
+</div>
+</div>
+
+<div class="item">
+<div class="title">📜 СТАТУТ ДБР</div>
+<div class="content">
+• Дисципліна  
+• Субординація  
+• Міранда  
+• Відеофіксація  
+</div>
+</div>
+
+<!-- ADMIN -->
+<div class="box">
+<h2>🛠 АДМІНКА</h2>
+
+<input id="adminPass" type="password" placeholder="Пароль">
+<button onclick="openAdmin()">Увійти</button>
+
+<div id="adminPanel" style="display:none">
+
+<input id="targetName" placeholder="Ім'я гравця">
+<input id="newRank" placeholder="Нове звання">
+<button onclick="changeRank()">Змінити звання</button>
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// ACCORDION
+document.querySelectorAll(".title").forEach(t=>{
+t.onclick=()=>t.parentElement.classList.toggle("active");
+});
+
+// REGISTER
+function register(){
+
+let user={
+name:name.value,
+rank:rank.value,
+badge:badge.value,
+car:car.value,
+tg:tg.value
+};
+
+localStorage.setItem("dbr_user",JSON.stringify(user));
+
+// одразу відкриває портал
+document.getElementById("auth").style.display="none";
+document.getElementById("portal").style.display="block";
+
+loadProfile(user);
+}
+
+function loadProfile(user){
+p_name.innerText=user.name;
+p_rank.innerText=user.rank;
+p_badge.innerText=user.badge;
+p_car.innerText=user.car;
+p_tg.innerText=user.tg;
+}
+
+// ADMIN
+function openAdmin(){
+if(adminPass.value==="1234"){
+adminPanel.style.display="block";
+}else{
+alert("Невірний пароль");
+}
+}
+
+function changeRank(){
+
+let user=JSON.parse(localStorage.getItem("dbr_user"));
+
+if(user && user.name===targetName.value){
+user.rank=newRank.value;
+localStorage.setItem("dbr_user",JSON.stringify(user));
+loadProfile(user);
+alert("Звання змінено");
+}else{
+alert("Гравця не знайдено");
+}
+}
+
+</script>
+
+</body>
+</html>
