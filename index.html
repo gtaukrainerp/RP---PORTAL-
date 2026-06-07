@@ -1,16 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>ДБР ПОРТАЛ</title>
+
+<style>
+body{
+font-family:Arial;
+background:green;
+color:white;
+text-align:center;
+margin:0;
+padding:20px;
+}
+
+.card{
+background:rgba(0,0,0,0.3);
+padding:15px;
+border-radius:10px;
+max-width:400px;
+margin:auto;
+}
+
+input,button{
+width:90%;
+padding:10px;
+margin:5px;
+border:none;
+border-radius:8px;
+}
+
+.hidden{display:none;}
+</style>
+</head>
 <body>
 
-<h1>ТЕСТ</h1>
+<h1>🚔 ДБР ПОРТАЛ</h1>
 
-<button onclick="test()">Натисни</button>
+<div id="auth" class="card">
 
-<script>
-function test(){
-alert("Працює!");
+<input id="username" placeholder="Ім'я">
+<input id="password" type="password" placeholder="Пароль">
+
+<button onclick="register()">Реєстрація</button>
+<button onclick="login()">Вхід</button>
+
+</div>
+
+<div id="panel" class="card hidden">
+
+<h2>Профіль</h2>
+
+<div id="info"></div>
+
+<h3>DB: <span id="db">0</span></h3>
+
+<button onclick="addDB()">+10 DB</button>
+
+<hr>
+
+<h3>Адмін</h3>
+
+<input id="adminPass" placeholder="Пароль адміна">
+<input id="target" placeholder="Користувач">
+<input id="amount" placeholder="DB">
+
+<button onclick="admin()">Видати DB</button>
+
+</div>
+  <script>
+
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let current = null;
+
+function save(){
+localStorage.setItem("users", JSON.stringify(users));
 }
+
+function register(){
+
+let u = {
+username: document.getElementById("username").value,
+password: document.getElementById("password").value,
+db: 0
+};
+
+if(!u.username || !u.password){
+alert("Заповни дані");
+return;
+}
+
+if(users.find(x => x.username === u.username)){
+alert("Вже існує");
+return;
+}
+
+users.push(u);
+save();
+
+alert("Реєстрація OK");
+}
+
+function login(){
+
+let u = users.find(x =>
+x.username === document.getElementById("username").value &&
+x.password === document.getElementById("password").value
+);
+
+if(!u){
+alert("Невірно");
+return;
+}
+
+current = u;
+
+document.getElementById("auth").classList.add("hidden");
+document.getElementById("panel").classList.remove("hidden");
+
+update();
+}
+
+function update(){
+document.getElementById("info").innerText =
+"Ім'я: " + current.username;
+
+document.getElementById("db").innerText = current.db;
+}
+
+function addDB(){
+current.db += 10;
+save();
+update();
+}
+
+function admin(){
+
+if(document.getElementById("adminPass").value !== "DBR2026"){
+alert("NO");
+return;
+}
+
+let t = users.find(x =>
+x.username === document.getElementById("target").value
+);
+
+if(!t){
+alert("Нема");
+return;
+}
+
+t.db += Number(document.getElementById("amount").value || 0);
+
+save();
+alert("OK");
+}
+
 </script>
 
 </body>
 </html>
+<hr>
+
+<h3>📕 Правила ДБР</h3>
+
+<button onclick="showRules()">Відкрити правила</button>
+
+<div id="rules" class="card hidden" style="text-align:left;">
+
+📕 СТАТУТ ДБР  
+━━━━━━━━━━━━━━━
+
+📌 1. Загальні положення  
+• Дотримання обов’язкове  
+• Незнання не звільняє  
+
+🎖 2. Субординація  
+• Накази виконуються  
+• Повага до старших  
+
+📋 3. Обов’язки  
+• Дисципліна  
+• Порядок  
+• RP поведінка  
+
+⛔ 4. Заборони  
+• Порушення RP  
+• Самовільні дії  
+
+⚖️ 5. Відповідальність  
+• Догана  
+• Пониження  
+• Звільнення  
+
+</div>
+function showRules(){
+let r = document.getElementById("rules");
+r.classList.toggle("hidden");
+}
+<hr>
+
+<h3>📊 ПІДВИЩЕННЯ</h3>
+
+<div id="expText">EXP: 0 | Рівень: 1</div>
+
+<button onclick="work()">🚓 Отримати EXP</button>
+function work(){
+
+if(!current.exp && current.exp !== 0){
+current.exp = 0;
+current.level = 1;
+}
+
+current.exp += 10;
+
+if(current.exp >= 50){
+current.exp = 0;
+current.level += 1;
+alert("🎉 ПІДВИЩЕННЯ РІВНЯ!");
+}
+
+save();
+update();
+}
+if(!current.exp && current.exp !== 0) current.exp = 0;
+if(!current.level) current.level = 1;
+
+document.getElementById("expText").innerText =
+"EXP: " + current.exp + " | Рівень: " + current.level;
+
