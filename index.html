@@ -131,4 +131,140 @@ return;
 
 user=found;
 
-document.getElementById("auth").classList.add("hiddenu.bg=
+document.getElementById("auth").classList.add("hidden</div>
+
+<script>
+
+let user=null;
+let users=JSON.parse(localStorage.getItem("users")||"[]");
+
+function save(){
+localStorage.setItem("users",JSON.stringify(users));
+}
+
+// REGISTER
+function register(){
+
+let u={
+username:username.value,
+rank:rank.value,
+badge:badge.value,
+car:car.value,
+telegram:tg.value,
+tgname:tgname.value,
+roblox:roblox.value,
+password:password.value
+};
+
+if(!u.username||!u.password){
+alert("Заповни дані");
+return;
+}
+
+if(users.find(x=>x.username==u.username)){
+alert("Існує");
+return;
+}
+
+u.db=0;
+u.bg="green";
+
+users.push(u);
+save();
+alert("OK");
+}
+
+// LOGIN
+function login(){
+
+let found=users.find(x=>x.username==username.value && x.password==password.value);
+
+if(!found){
+alert("Невірно");
+return;
+}
+
+user=found;
+
+auth.classList.add("hidden");
+panel.classList.remove("hidden");
+
+document.body.style.background=user.bg;
+updateUI();
+}
+
+// UI
+function updateUI(){
+info.innerText=
+Ім'я: ${user.username}
+Звання: ${user.rank}
+Жетон: ${user.badge}
+Авто: ${user.car}
+Telegram: ${user.telegram}
+Тг нік: ${user.tgname}
+Roblox: ${user.roblox};
+
+db.innerText=user.db;
+}
+
+// BUY
+function buy(color,price){
+if(user.db<price)return alert("Нема DB");
+
+user.db-=price;
+user.bg=color;
+
+document.body.style.background=color;
+save();
+updateUI();
+}
+
+// BG
+function setBg(c){
+user.bg=c;
+document.body.style.background=c;
+save();
+}
+
+// ADMIN DB
+function giveDB(){
+if(adminPass.value!="DBR2026")return alert("NO");
+
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
+
+t.db+=Number(amount.value||0);
+save();
+alert("OK");
+}
+
+// ADMIN FULL
+function adminUpdate(){
+if(adminPass.value!="DBR2026")return alert("NO");
+
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
+
+if(newRank.value) t.rank=newRank.value;
+if(newBadge.value) t.badge=newBadge.value;
+if(newCar.value) t.car=newCar.value;
+if(newTG.value) t.telegram=newTG.value;
+if(newTgName.value) t.tgname=newTgName.value;
+if(newRoblox.value) t.roblox=newRoblox.value;
+
+if(amount.value) t.db+=Number(amount.value);
+
+save();
+alert("ОК");
+}
+
+// TABS
+function openTab(id){
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
