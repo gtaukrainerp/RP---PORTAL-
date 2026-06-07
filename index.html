@@ -262,8 +262,10 @@ tgname: document.getElementById("tgname").value,
 roblox: document.getElementById("roblox").value,
 password: document.getElementById("password").value
 };
-  }
-</script>
+}
 
-</body>
-</html>
+  
+if(!u.username || !u.password){
+alert("Заповни логін і пароль");
+return;
+}
