@@ -2,247 +2,268 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>ДБР RP PORTAL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>РП ПОРТАЛ ДБР</title>
 
 <style>
 body{
-margin:0;
 font-family:Arial;
-background:#020a06;
+background:green;
 color:white;
-}
-
-header{
 text-align:center;
-padding:30px;
-background:#06321d;
-color:#00ff88;
-text-shadow:0 0 15px #00ff88;
+margin:0;
 }
 
-.box{
-max-width:500px;
-margin:10px auto;
-padding:20px;
-background:#0a1f14;
-border:1px solid #00ff88;
-border-radius:10px;
-}
-
-input{
-width:100%;
+input,button{
 padding:10px;
-margin:5px 0;
+margin:5px;
+width:85%;
+max-width:320px;
+border-radius:6px;
 border:none;
-border-radius:8px;
-background:#062015;
-color:white;
 }
 
-button{
-width:100%;
-padding:12px;
-background:#00ff88;
-border:none;
-cursor:pointer;
-font-weight:bold;
-}
+button{cursor:pointer;}
 
-button:hover{box-shadow:0 0 15px #00ff88;}
-
-#portal{display:none;}
-
-.item{
-max-width:800px;
-margin:10px auto;
-border:1px solid #00ff88;
+.card{
+background:rgba(0,0,0,0.35);
+padding:10px;
+margin:10px;
 border-radius:10px;
-overflow:hidden;
 }
 
-.title{
-padding:12px;
-background:#062a18;
-cursor:pointer;
-font-weight:bold;
-}
+.hidden{display:none;}
 
-.content{
-max-height:0;
-overflow:hidden;
-transition:0.3s;
-padding:0 15px;
-white-space:pre-wrap;
-color:#b6ffda;
-}
-
-.item.active .content{
-max-height:1500px;
+.tab{
+display:none;
+white-space:pre-line;
 padding:15px;
 }
+
+.active{display:block;}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>ДБР RP PORTAL</h1>
-</header>
+<h1>🚔 РП ПОРТАЛ ДБР</h1>
 
-<!-- REGISTER -->
-<div id="auth">
+<!-- LOGIN -->
+<div id="auth" class="card">
+<h3>Реєстрація / Вхід</h3>
 
-<div class="box">
-<h2>📝 Реєстрація</h2>
-
-<input id="name" placeholder="Ім'я">
+<input id="username" placeholder="Ім'я">
 <input id="rank" placeholder="Звання">
 <input id="badge" placeholder="Жетон">
 <input id="car" placeholder="Авто">
 <input id="tg" placeholder="Telegram">
+<input id="tgname" placeholder="Тг нік">
+<input id="roblox" placeholder="Roblox">
+<input id="password" type="password" placeholder="Пароль">
 
-<button onclick="register()">ЗАРЕЄСТРУВАТИСЯ</button>
+<button onclick="register()">Реєстрація</button>
+<button onclick="login()">Вхід</button>
 </div>
 
-</div>
+<!-- PANEL -->
+<div id="panel" class="hidden">
 
-<!-- PORTAL -->
-<div id="portal">
+<h2>👤 Профіль</h2>
+<pre id="info"></pre>
+<h3>DB: <span id="db">0</span></h3>
 
-<div class="box">
-<h2>👮 Профіль</h2>
+<button onclick="setBg('green')">Зелений</button>
+<button onclick="buy('blue',500)">Синій 500</button>
+<button onclick="buy('red',500)">Червоний 500</button>
+<button onclick="buy('gold',1000)">Золотий 1000</button>
 
-<p><b>Ім'я:</b> <span id="p_name"></span></p>
-<p><b>Звання:</b> <span id="p_rank"></span></p>
-<p><b>Жетон:</b> <span id="p_badge"></span></p>
-<p><b>Авто:</b> <span id="p_car"></span></p>
-<p><b>Telegram:</b> <span id="p_tg"></span></p>
-</div>
+<hr>
+
+<button onclick="openTab('rules')">📕 Статут</button>
+<button onclick="openTab('arrest')">🚔 Затримання</button>
+<button onclick="openTab('code')">📘 Кодекс</button>
+<button onclick="openTab('constitution')">⚖️ Конституція</button>
+<button onclick="openTab('admin')">👑 Адмін</button>
 
 <!-- RULES -->
-<div class="item">
-<div class="title">📊 СИСТЕМА БАЛІВ</div>
-<div class="content">
-🏋️ +1 Тренування
-📑 +2 Документація
-💰 +3 Хабарники
-🔫 +2 Затримання
-🚓 +3 Спецоперації
-🧠 +1 Допомога
-⏱ +1 Актив
-📢 +2 Ініціатива
-</div>
+<div id="rules" class="tab active">
+📕 СТАТУТ ДБР
+1. Дисципліна
+2. Накази
+3. Покарання
 </div>
 
-<div class="item">
-<div class="title">📜 СТАТУТ ДБР</div>
-<div class="content">
-• Дисципліна  
-• Субординація  
-• Міранда  
-• Відеофіксація  
+<!-- ARREST -->
+<div id="arrest" class="tab">
+🚔 ЗАТРИМАННЯ
+• Представитись
+• Права
+• Статті
+• Протокол
 </div>
+
+<!-- CODE -->
+<div id="code" class="tab">
+📘 КОДЕКС
+• Честь
+• Етика
+• Конфіденційність
+</div>
+
+<!-- CONSTITUTION -->
+<div id="constitution" class="tab">
+⚖️ КОНСТИТУЦІЯ
+• Керівництво
+• Права
+• Дисципліна
 </div>
 
 <!-- ADMIN -->
-<div class="box">
-<h2>🛠 АДМІНКА</h2>
+<div id="admin" class="tab card">
+👑 АДМІН ПАНЕЛЬ
 
-<input id="adminPass" type="password" placeholder="Пароль">
-<button onclick="openAdmin()">Увійти</button>
+<input id="adminPass" placeholder="Admin пароль">
+<input id="target" placeholder="Користувач">
 
-<div id="adminPanel" style="display:none">
+<h3>Редагування:</h3>
 
-<input id="targetName" placeholder="Ім'я гравця">
-<input id="newRank" placeholder="Нове звання">
-<button onclick="changeRank()">Змінити звання</button>
+<input id="newRank" placeholder="Звання">
+<input id="newBadge" placeholder="Жетон">
+<input id="newCar" placeholder="Авто">
+<input id="newTG" placeholder="Telegram">
+<input id="newTgName" placeholder="Тг нік">
+<input id="newRoblox" placeholder="Roblox">
 
-</div>
-</div>
+<input id="amount" placeholder="DB +/-">
 
-</div>
+<button onclick="adminUpdate()">ОНОВИТИ</button>
+<button onclick="giveDB()">DB</button></div>
 
 <script>
+let user=null;
+let users=JSON.parse(localStorage.getItem("users")||"[]");
 
-// ACCORDION
-document.querySelectorAll(".title").forEach(t=>{
-t.onclick=()=>t.parentElement.classList.toggle("active");
-});
+// SAVE
+function save(){
+localStorage.setItem("users",JSON.stringify(users));
+}
 
 // REGISTER
 function register(){
+let u=getForm();
 
-let user={
-name:name.value,
+if(users.find(x=>x.username==u.username)){
+alert("Існує");
+return;
+}
+
+u.db=0;
+u.bg="green";
+
+users.push(u);
+save();
+alert("OK");
+}
+
+// LOGIN
+function login(){
+let u=getForm();
+
+let f=users.find(x=>x.username==u.username && x.password==u.password);
+
+if(!f){alert("Невірно");return;}
+
+user=f;
+
+auth.classList.add("hidden");
+panel.classList.remove("hidden");
+
+document.body.style.background=user.bg;
+updateUI();
+}
+
+// UI
+function updateUI(){
+info.innerText =
+Ім'я: ${user.username}
+Звання: ${user.rank}
+Жетон: ${user.badge}
+Авто: ${user.car}
+Telegram: ${user.telegram}
+Тг нік: ${user.tgname}
+Roblox: ${user.roblox};
+
+db.innerText=user.db;
+}
+
+// BUY
+function buy(color,price){
+if(user.db<price)return alert("Нема DB");
+
+user.db-=price;
+user.bg=color;
+document.body.style.background=color;
+save();
+updateUI();
+}
+
+// BG
+function setBg(c){
+user.bg=c;
+document.body.style.background=c;
+save();
+}
+
+// ADMIN DB
+function giveDB(){
+if(adminPass.value!="DBR2026")return alert("NO");
+
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
+
+t.db+=Number(amount.value);
+save();
+alert("OK");
+}
+
+// ADMIN FULL EDIT
+function adminUpdate(){
+if(adminPass.value!="DBR2026")return alert("NO");
+
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
+
+if(newRank.value) t.rank=newRank.value;
+if(newBadge.value) t.badge=newBadge.value;
+if(newCar.value) t.car=newCar.value;
+if(newTG.value) t.telegram=newTG.value;
+if(newTgName.value) t.tgname=newTgName.value;
+if(newRoblox.value) t.roblox=newRoblox.value;
+if(amount.value) t.db+=Number(amount.value);
+
+save();
+alert("Оновлено");
+}
+
+// TABS
+function openTab(id){
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+// FORM
+function getForm(){
+return{
+username:username.value,
 rank:rank.value,
 badge:badge.value,
 car:car.value,
-tg:tg.value
+telegram:tg.value,
+tgname:tgname.value,
+roblox:roblox.value,
+password:password.value
 };
-
-localStorage.setItem("dbr_user",JSON.stringify(user));
-
-// одразу відкриває портал
-document.getElementById("auth").style.display="none";
-document.getElementById("portal").style.display="block";
-
-loadProfile(user);
 }
+</script>
 
-function loadProfile(user){
-p_name.innerText=user.name;
-p_rank.innerText=user.rank;
-p_badge.innerText=user.badge;
-p_car.innerText=user.car;
-p_tg.innerText=user.tg;
-}
-
-// ADMIN
-function openAdmin(){
-if(adminPass.value==="1234"){
-adminPanel.style.display="block";
-}else{
-alert("Невірний пароль");
-}
-}
-
-function changeRank(){
-
-let user=JSON.parse(localStorage.getItem("dbr_user"));
-
-if(user && user.name===targetName.value){
-user.rank=newRank.value;
-localStorage.setItem("dbr_user",JSON.stringify(user));
-loadProfile(user);
-alert("Звання змінено");
-}else{
-alert("Гравця не знайдено");
-}
-}
-
-  function openAdmin(){
-
-const pass = document.getElementById("adminPass").value.trim();
-
-if(pass === "1234"){
-document.getElementById("adminPanel").style.display = "block";
-document.getElementById("adminBox").style.display = "block";
-}else{
-alert("Невірний пароль");
-}
-  }<div class="box" id="adminBox" style="display:none">
-<h2>🛠 АДМІНКА</h2>
-
-<input id="adminPass" type="password" placeholder="Пароль">
-<button onclick="openAdmin()">Увійти</button>
-
-<div id="adminPanel" style="display:none">
-
-<input id="targetName" placeholder="Ім'я гравця">
-<input id="newRank" placeholder="Нове звання">
-
-<button onclick="changeRank()">Змінити звання</button>
-
-</div>
-</div>
+</body>
+</html>
