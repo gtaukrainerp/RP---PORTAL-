@@ -221,26 +221,17 @@ alert("Гравця не знайдено");
 }
 }
 
-</script>
+  function openAdmin(){
 
-</body>
-</html>
+const pass = document.getElementById("adminPass").value.trim();
 
-// показ адмінки тільки після пароля
-function openAdmin(){
-
-const pass = document.getElementById("adminPass").value;
-
-// 🔥 ТУТ ТВОЙ ПАРОЛЬ
-if(pass === "DBR2026_SECRET"){
-
+if(pass === "1234"){
 document.getElementById("adminPanel").style.display = "block";
-
+document.getElementById("adminBox").style.display = "block";
 }else{
 alert("Невірний пароль");
 }
-}
-<div class="box" id="adminBox" style="display:none">
+  }<div class="box" id="adminBox" style="display:none">
 <h2>🛠 АДМІНКА</h2>
 
 <input id="adminPass" type="password" placeholder="Пароль">
