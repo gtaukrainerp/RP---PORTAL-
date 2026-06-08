@@ -11,61 +11,37 @@ background:green;
 color:white;
 text-align:center;
 margin:0;
-  .tab{
-display:none;
-opacity:0;
-transform:translateY(10px);
-transition:0.3s ease;
-}
-
-.tab.active{
-display:block;
-opacity:1;
-transform:translateY(0);
-}
-
-button{
-transition:0.2s ease;
-cursor:pointer;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-.card{
-transition:0.3s ease;
-}
-
-.card:hover{
-transform:scale(1.01);
-}
-}
-
-input,button{
-padding:10px;
-margin:5px;
-width:80%;
-max-width:300px;
-}
-
-.card{
-background:rgba(0,0,0,0.4);
-padding:15px;
-margin:10px;
-border-radius:12px;
+transition:0.5s;
 }
 
 .hidden{display:none;}
-.tab{display:none;}
-.active{display:block;}
 
-.document{
-background:rgba(0,0,0,0.5);
+.card{
+background:rgba(0,0,0,0.4);
 padding:10px;
 margin:10px;
 border-radius:10px;
-text-align:left;
+}
+
+.tab{display:none;}
+
+button{
+padding:10px;
+margin:5px;
+cursor:pointer;
+}
+
+#panel{
+display:none;
+}
+
+.fade{
+animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -81,9 +57,8 @@ text-align:left;
 <input id="username" placeholder="Ім'я">
 <input id="rank" placeholder="Звання">
 <input id="badge" placeholder="Жетон">
-<input id="car" placeholder="Машина">
+<input id="car" placeholder="Авто">
 <input id="tg" placeholder="Telegram">
-<input id="tgname" placeholder="ТГ нік">
 <input id="roblox" placeholder="Roblox">
 <input id="password" type="password" placeholder="Пароль">
 
@@ -92,76 +67,61 @@ text-align:left;
 </div>
 
 <!-- PANEL -->
-<div id="panel" class="hidden">
-  .hidden{display:none;
-  }
-
+<div id="panel" class="card fade">
 
 <h2>👤 Профіль</h2>
-
 <div id="profile"></div>
 
-<h3>DB: <span id="db">0</span></h3>
+<h3>💰 DB: <span id="db">0</span></h3>
+
+<button onclick="setBg('green')">Зелений</button>
+<button onclick="buy('blue',500)">Синій 500</button>
+<button onclick="buy('red',500)">Червоний 500</button>
 
 <hr>
 
-<h3>🎨 Кольори</h3>
-<button onclick="buy('blue',500)">Синій - 500 DB </button>
-<button onclick="buy('red',750)">Червоний - 750 DB</button>
-<button onclick="buy('gold',1500)">Золотий - 1500 DB</button>
-<button onclick="buy('black',650)">Чорний - 650 DB</button>
-<hr>
+<button onclick="openTab('rules')">📕 Статут</button>
+<button onclick="openTab('code')">📘 Кодекс</button>
+<button onclick="openTab('constitution')">⚖️ Конституція</button>
+<button onclick="openTab('points')">📊 Бали</button>
 
-<h3>📂 Документи</h3>
-<button onclick="openTab('rules')">Статут</button>
-<button onclick="openTab('code')">Кодекс</button>
-<button onclick="openTab('constitution')">Конституція</button>
-<button onclick="openTab('points')">Бали</button>
+<div id="rules" class="tab">📕 СТАТУТ ДБР...</div>
+<div id="code" class="tab">📘 КОДЕКС ДБР...</div>
+<div id="constitution" class="tab">⚖️ КОНСТИТУЦІЯ ДБР...</div>
+<div id="points" class="tab">📊 СИСТЕМА БАЛІВ...</div>
 
 <hr>
-
-<div id="rules" class="tab"></div>
-<div id="code" class="tab"></div>
-<div id="constitution" class="tab"></div>
-<div id="points" class="tab"></div>
 
 <!-- ADMIN -->
 <div class="card">
 <h3>👑 Адмінка</h3>
 
-<input id="adminPass" placeholder="Адмін пароль">
+<input id="adminPass" placeholder="Пароль">
 <input id="target" placeholder="Користувач">
 <input id="amount" placeholder="DB">
-<input id="newRank" placeholder="Нове звання">
+<input id="newRank" placeholder="Звання">
 
-<button onclick="giveDB()">Видати DB</button>
-<button onclick="changeRank()">Змінити звання</button>
+<button onclick="giveDB()">+DB</button>
+<button onclick="changeRank()">Звання</button>
 </div>
 
 </div>
-
-</body>
-  <script>
-
 let users = JSON.parse(localStorage.getItem("users") || "[]");
 let user = null;
 
-// SAVE
 function save(){
 localStorage.setItem("users", JSON.stringify(users));
 }
 
-// FORM
 function getForm(){
 return{
-username: document.getElementById("username").value,
-rank: document.getElementById("rank").value,
-badge: document.getElementById("badge").value,
-car: document.getElementById("car").value,
-telegram: document.getElementById("tg").value,
-tgname: document.getElementById("tgname").value,
-roblox: document.getElementById("roblox").value,
-password: document.getElementById("password").value
+username: username.value,
+rank: rank.value,
+badge: badge.value,
+car: car.value,
+telegram: tg.value,
+roblox: roblox.value,
+password: password.value
 };
 }
 
@@ -171,7 +131,7 @@ function register(){
 let u = getForm();
 
 if(users.find(x => x.username === u.username)){
-alert("Користувач існує");
+alert("Такий є");
 return;
 }
 
@@ -181,7 +141,7 @@ u.bg = "green";
 users.push(u);
 save();
 
-alert("Реєстрація успішна");
+alert("Реєстрація OK");
 }
 
 // LOGIN
@@ -201,30 +161,30 @@ return;
 
 user = found;
 
-document.getElementById("auth").classList.add("hidden");
-document.getElementById("panel").classList.remove("hidden");
-
-document.body.style.background = user.bg;
+auth.style.display = "none";
+panel.style.display = "block";
 
 updateUI();
+document.body.style.background = user.bg;
 }
 
-// PROFILE
+// UI
 function updateUI(){
 
-document.getElementById("profile").innerHTML =
-"👤 Ім'я: " + user.username + "<br>" +
-"🎖 Звання: " + user.rank + "<br>" +
-"🪪 Жетон: " + user.badge + "<br>" +
-"🚓 Авто: " + user.car + "<br>" +
-"📱 TG: " + user.telegram + "<br>" +
-"🎮 Roblox: " + user.roblox;
+profile.innerHTML =
+"👤 " + user.username + "<br>" +
+"🎖 " + user.rank + "<br>" +
+"🪪 " + user.badge + "<br>" +
+"🚓 " + user.car;
 
+db.innerText = user.db;
 document.body.style.background = user.bg;
 }
 
 // BUY COLORS
 function buy(color,price){
+
+if(!user) return;
 
 if(user.db < price){
 alert("Нема DB");
@@ -234,21 +194,14 @@ return;
 user.db -= price;
 user.bg = color;
 
-document.body.style.background = color;
-
 save();
 updateUI();
 }
 
-// ADMIN GIVE DB
+// ADMIN DB
 function giveDB(){
 
-function giveDB(){
-
-if(adminPass.value !== "DBR2026"){
-alert("Нема доступу");
-return;
-}
+if(adminPass.value !== "DBR2026") return;
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -257,22 +210,18 @@ t.db += Number(amount.value);
 
 save();
 
-// 🔥 ОНОВЛЕННЯ ЕКРАНУ
 if(user && user.username === t.username){
 user.db = t.db;
 updateUI();
 }
 
-alert("DB видано: +" + amount.value);
+alert("DB видано");
 }
 
-// ADMIN CHANGE RANK
+// ADMIN RANK
 function changeRank(){
 
-if(adminPass.value !== "DBR2026"){
-alert("Нема доступу");
-return;
-}
+if(adminPass.value !== "DBR2026") return;
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -281,7 +230,6 @@ t.rank = newRank.value;
 
 save();
 
-// 🔥 ОНОВЛЕННЯ ЕКРАНУ
 if(user && user.username === t.username){
 user.rank = t.rank;
 updateUI();
@@ -289,205 +237,24 @@ updateUI();
 
 alert("Звання змінено");
 }
-
 // TABS
 function openTab(id){
-  function openTab(id){
 
-// ховаємо всі вкладки
 document.querySelectorAll(".tab").forEach(t=>{
 t.style.display = "none";
 });
 
-// показуємо потрібну
 let el = document.getElementById(id);
 
 if(!el){
-alert("Немає вкладки: " + id);
+alert("Нема вкладки: " + id);
 return;
 }
 
 el.style.display = "block";
 }
 
-
-📕 СТАТУТ ДБР
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📌 1. Загальні положення
-
-1.1 Статут ДБР визначає порядок служби, обов’язки та поведінку співробітників.
-1.2 Кожен співробітник зобов’язаний знати та дотримуватися цього Статуту.
-1.3 Порушення Статуту тягне за собою дисциплінарну відповідальність.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-🎖 2. Субординація
-
-2.1 Накази старшого складу є обов’язковими до виконання.
-2.2 Обговорення наказів допускається лише у службовому порядку.
-2.3 Неповага до старших за званням заборонена.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📋 3. Обов’язки співробітника
-
-3.1 Дотримуватися законів, Конституції ДБР та RP-правил сервера.
-3.2 Виконувати службові обов’язки сумлінно.
-3.3 Підтримувати дисципліну та порядок.
-3.4 Доповідати про порушення в межах RP.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-⛔️ 4. Заборони
-
-4.1 Перевищення повноважень.
-4.2 Самовільні дії без наказу.
-4.3 Порушення RP-процедур.
-4.4 Образи та неадекватна поведінка.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-⚖️ 5. Права співробітника
-
-5.1 Отримувати накази в межах закону.
-5.2 Вимагати дотримання субординації.
-5.3 Звертатися до старшого складу з рапортом.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-👔 6. Службова форма та поведінка
-
-6.1 Співробітник зобов’язаний перебувати у формі під час несення служби.
-6.2 Поведінка повинна відповідати статусу ДБР.
-6.3 Заборонені дії, що дискредитують службу.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-🚨 7. Дисциплінарні заходи
-
-7.1 Зауваження.
-7.2 Догана.
-7.3 Пониження у званні.
-7.4 Звільнення з ДБР.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📢 8. Прикінцеві положення
-
-8.1 Статут є обов’язковим для всіх співробітників ДБР.
-8.2 Незнання Статуту не звільняє від відповідальності.
-8.3 Зміни затверджуються старшим складом.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📅 Дата: 18.03.2026
-✍️ Підпис: І.Ч.
-</pre>
-</div>
-</div>
-
-
-<div id="code" class="tab">
-<div class="document">
-<pre>
-📘 КОДЕКС ДБР
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📌 Загальні положення
-Кодекс ДБР визначає моральні, етичні та професійні принципи.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-⚖️ 1. Честь та гідність
-1.1 Захищати репутацію ДБР.
-1.2 Повага до всіх.
-1.3 Не дискредитувати фракцію.
-1.4 Бути прикладом дисципліни.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-🎖 2. Службова етика
-2.1 Дотримання правил.
-2.2 Заборона зловживань.
-2.3 Заборона вигоди.
-2.4 Допомога колегам.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-🔒 3. Конфіденційність
-3.1 Не розголошувати дані.
-3.2 Захист інформації.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📅 2026
-</pre>
-</div>
-</div>
-
-
-<div id="constitution" class="tab">
-<div class="document">
-<pre>
-⚖️ КОНСТИТУЦІЯ ДБР
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📜 Розділ I
-1. ДБР — незалежна організація.
-2. Конституція — основний документ.
-3. Інші документи не можуть суперечити.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-👑 Розділ II
-1. Глава ДБР має повну владу.
-2. Призначення та звільнення.
-3. Зміни документів.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-👥 Розділ III
-1. Права працівників.
-2. Скарги.
-3. Захист інтересів.
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-📅 07/06/2026
-</pre>
-</div>
-</div>
-
-
-<div id="points" class="tab">
-<div class="document">
-<pre>
-📊 СИСТЕМА БАЛІВ ДБР
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-🏋️ Тренування +1
-🚔 Затримання +2
-🚓 Рейди +3
-🧠 Допомога +1
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-❌ Порушення -2
-⚠️ Догана -3
-
-━━━━━━━━━━━━━━━━━━━━━━━
-
-👑 ПІДВИЩЕННЯ:
-• Рядовий → Капрал 600 EXP
-• Капрал → Сержант 1200 EXP
-• Офіцерський склад по рішенням керівництва
-
-━━━━━━━━━━━━━━━━━━━━━━━
-</pre>
-</div>
-</div>
+// старт: нічого не видно до входу
+window.onload = function(){
+panel.style.display = "none";
+}  
