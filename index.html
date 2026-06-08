@@ -500,8 +500,29 @@ document.body.style.background=user.bg;
 
 // UI
 function updateUI(){
-info.innerText=user.username+" | "+user.rank;
-db.innerText=user.db;
+let fresh = users.find(x => x.username == user.username);
+
+if(fresh){
+    user = fresh;
+}
+
+function updateUI(){
+document.getElementById("info").innerHTML = 
+<b>Ім'я:</b> ${user.username}<br>
+<b>Звання:</b> ${user.rank}<br>
+<b>Жетон:</b> ${user.badge}<br>
+<b>Машина:</b> ${user.car}<br>
+<b>Telegram:</b> ${user.telegram}<br>
+<b>ТГ Нік:</b> ${user.tgname}<br>
+<b>Roblox:</b> ${user.roblox}
+;
+
+document.getElementById("db").innerText = user.db;
+}
+
+document.getElementById("db").innerText =
+    user.db;
+}
 }
 
 // BUY
@@ -534,6 +555,13 @@ saveUsers();
 alert("OK");
 updateUI();
 }
+  
+<button onclick="showProfile()">Показати профіль</button>
+
+<div id="playerProfile"></div>
+
+<input id="newRank" placeholder="Нове звання">
+<button onclick="changeRank()">Змінити звання</button>
 
 // SAVE
 function update(){
@@ -560,7 +588,45 @@ roblox:roblox.value,
 password:password.value
 };
 }
-</script>
+</script>function showProfile(){
+if(adminPass.value!="DBR2026") return alert("no admin");
+
+let t = users.find(x => x.username == target.value);
+
+if(!t){
+    document.getElementById("playerProfile").innerHTML =
+    "Користувача не знайдено";
+    return;
+}
+
+document.getElementById("playerProfile").innerHTML = 
+<hr>
+<b>Ім'я:</b> ${t.username}<br>
+<b>Звання:</b> ${t.rank}<br>
+<b>Жетон:</b> ${t.badge}<br>
+<b>Машина:</b> ${t.car}<br>
+<b>Telegram:</b> ${t.telegram}<br>
+<b>ТГ Нік:</b> ${t.tgname}<br>
+<b>Roblox:</b> ${t.roblox}<br>
+<b>DB:</b> ${t.db}
+;
+}
+
+  function changeRank(){
+if(adminPass.value != "DBR2026")
+    return alert("no admin");
+
+let t = users.find(x => x.username == target.value);
+
+if(!t)
+    return alert("Користувача не знайдено");
+
+t.rank = newRank.value;
+
+saveUsers();
+
+alert("Звання змінено");
+}
 
 </body>
 </html>
