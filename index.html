@@ -287,14 +287,22 @@ localStorage.setItem("users", JSON.stringify(users));
 // FORM
 function getForm(){
 return{
-username:username.value,
-rank:rank.value,
-badge:badge.value,
-car:car.value,
-telegram:tg.value,
-tgname:tgname.value,
-roblox:roblox.value,
-password:password.value
+username:
+    document.getElementById("username").value,
+  rank:
+    document.getElementById("rank").value,
+  badge:
+    document.getElementById("badge").value,
+  car:
+    document.getElementById("car").value,
+  telegram:
+    document.getElementById("tg").value,
+  tgname:
+    document.getElementById("tgname").value,
+  roblox:
+    document.getElementById("roblox").value,
+  password:
+    document.getElementById("password").value,
 };
 }
 
