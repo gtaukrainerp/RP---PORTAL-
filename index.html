@@ -114,7 +114,7 @@ cursor:pointer;
 <button onclick="openTab('constitution')">⚖️ Конституція</button>
 <button onclick="openTab('admin')">👑 Адмін</button>
   
-<div id="rules" class="tab active"> 📕 СТАТУТ ДБР
+<div id="rules" class="tab active" div.tab = white-space: pre-line;> 📕 СТАТУТ ДБР
 
 ━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -187,7 +187,7 @@ cursor:pointer;
 
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
-<div id="arrest" class="tab">🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
+<div id="arrest" class="tab" div.tab = white-space: pre-line;">🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
 
 Шановні співробітники ДБР ⚖️
 
@@ -266,7 +266,7 @@ cursor:pointer;
 
 "Професіоналізм співробітника визначається не лише затриманням, а й дотриманням закону під час його проведення."</div>
 
-<div id="code" class="tab">📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+<div id="code" class="tab" div.tab = white-space: pre-line;>📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📌 Загальні положення 📌
 Кодекс ДБР визначає моральні, етичні та професійні принципи, яких зобов’язаний дотримуватися кожен працівник ДБР під час виконання службових обов’язків.
@@ -302,7 +302,7 @@ cursor:pointer;
 📅 Дата затвердження: ..2026
 ✍️ Підпис: І.Ч.</div>
 
-<div id="constitution" class="tab">⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+<div id="constitution" class="tab" div.tab = white-space: pre-line;>⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📜 Розділ I. Основні засади 📜
 1.1 🏛 ДБР є незалежною організацією, що здійснює свою діяльність відповідно до внутрішніх нормативних документів.
@@ -339,7 +339,7 @@ cursor:pointer;
 ━━━━━━━━━━━━━━━━━━━━━━━
 📅 Дата затвердження: 07/06/2026
 ✍️ Підпис: І.Ч.</div>
-<div id="rules" class="tab">📜 СТАТУТ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+<div id="rules" class="tab" div.tab = white-space: pre-line;>📜 СТАТУТ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 
 ━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -517,7 +517,7 @@ if(fresh){
     user = fresh;
 }
 
-document.getElementById("info").innerHTML TML = 
+document.getElementById("info").innerHTML = 
 <b>Ім'я:</b> ${user.username}<br>
 <b>Звання:</b> ${user.rank}<br>
 <b>Жетон:</b> ${user.badge}<br>
@@ -577,14 +577,14 @@ document.getElementById(id).classList.add("active");
 // FORM
 function getForm(){
 return{
-username:username.value,
-rank:rank.value,
-badge:badge.value,
-car:car.value,
-telegram:tg.value,
-tgname:tgname.value,
-roblox:roblox.value,
-password:password.value
+username: document.getElementById("username").value,
+rank: document.getElementById("rank").value,
+badge: document.getElementById("badge").value,
+car: document.getElementById("car").value,
+telegram: document.getElementById("tg").value,
+tgname: document.getElementById("tgname").value,
+roblox: document.getElementById("roblox").value,
+password: document.getElementById("password").value
 };
 }
   function showProfile(){
