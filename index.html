@@ -103,10 +103,10 @@ text-align:left;
 <hr>
 
 <h3>🎨 Кольори</h3>
-<button onclick="buy('blue',500)">Синій</button>
-<button onclick="buy('red',500)">Червоний</button>
-<button onclick="buy('gold',1000)">Золотий</button>
-
+<button onclick="buy('blue',500)">Синій - 500 DB </button>
+<button onclick="buy('red',750)">Червоний - 750 DB</button>
+<button onclick="buy('gold',1500)">Золотий - 1500 DB</button>
+<button onclick="buy('black',650)">Чорний - 650 DB</button>
 <hr>
 
 <h3>📂 Документи</h3>
@@ -117,7 +117,7 @@ text-align:left;
 
 <hr>
 
-<div id="rules" class="tab active"></div>
+<div id="rules" class="tab"></div>
 <div id="code" class="tab"></div>
 <div id="constitution" class="tab"></div>
 <div id="points" class="tab"></div>
@@ -217,7 +217,7 @@ document.getElementById("profile").innerHTML =
 "📱 TG: " + user.telegram + "<br>" +
 "🎮 Roblox: " + user.roblox;
 
-document.getElementById("db").innerText = user.db;
+document.body.style.background = user.bg;
 }
 
 // BUY COLORS
@@ -251,7 +251,7 @@ if(!t) return;
 t.db += Number(amount.value);
 
 save();
-alert("DB видано");
+alert("DB видано: +" + amount.value);
 }
 
 // ADMIN CHANGE RANK
