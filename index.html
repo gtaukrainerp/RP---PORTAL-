@@ -2,13 +2,221 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>РП Портал ДБР</title>
+<title>RP System</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-<style>
-body{
+<body>
+
+<div id="auth">
+<h2>Вхід / Реєстрація</h2>
+
+<input id="username" placeholder="Ім'я">
+<input id="rank" placeholder="Звання">
+<input id="badge" placeholder="Жетон">
+<input id="car" placeholder="Авто">
+<input id="tg" placeholder="Telegram">
+<input id="roblox" placeholder="Roblox">
+<input id="password" type="password" placeholder="Пароль">
+
+<button onclick="register()">Реєстрація</button>
+<button onclick="login()">Вхід</button>
+</div>
+
+<div id="panel" style="display:none">
+
+<h2>Профіль</h2>
+<div id="profile"></div>
+
+<h3>DB: <span id="db">0</span></h3>
+
+<hr>
+
+<h3>Магазин</h3>
+<button onclick="buy('blue',200)">Синій (500 DB)</button>
+<button onclick="buy('red',750)">Червоний (500 DB)</button>
+<button onclick="buy('purple',950)">Фіолетовий (900 DB)</button>
+<button onclick="buy('black',1200)">Чорний (1200 DB)</button>
+<button onclick="buy('white',350)">Білий (300 DB)</button>
+<button onclick="buy('cyan',400)">Блакитний (800 DB)</button>
+<button onclick="buy('pink',600)">Рожевий (600 DB)</button>
+<button onclick="buy('gold',2500)">Золотий (1000 DB)</button>
+<button onclick="buy('orange',800)">Помаранчевий</button>
+
+
+<hr>
+
+<h3>Документи</h3>
+<button onclick="openTab('rules')">Статут</button>
+<button onclick="openTab('code')">Кодекс</button>
+<button onclick="openTab('constitution')">Конституція</button>
+
+<div id="rules" class="tab">📕 СТАТУТ ДБР
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 1. Загальні положення
+
+1.1 Статут ДБР визначає порядок служби, обов’язки та поведінку співробітників.
+1.2 Кожен співробітник зобов’язаний знати та дотримуватися цього Статуту.
+1.3 Порушення Статуту тягне за собою дисциплінарну відповідальність.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🎖 2. Субординація
+
+2.1 Накази старшого складу є обов’язковими до виконання.
+2.2 Обговорення наказів допускається лише у службовому порядку.
+2.3 Неповага до старших за званням заборонена.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 3. Обов’язки співробітника
+
+3.1 Дотримуватися законів, Конституції ДБР та RP-правил сервера.
+3.2 Виконувати службові обов’язки сумлінно.
+3.3 Підтримувати дисципліну та порядок.
+3.4 Доповідати про порушення в межах RP.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+⛔️ 4. Заборони
+
+4.1 Перевищення повноважень.
+4.2 Самовільні дії без наказу.
+4.3 Порушення RP-процедур.
+4.4 Образи та неадекватна поведінка.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+⚖️ 5. Права співробітника
+
+5.1 Отримувати накази в межах закону.
+5.2 Вимагати дотримання субординації.
+5.3 Звертатися до старшого складу з рапортом.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+👔 6. Службова форма та поведінка
+
+6.1 Співробітник зобов’язаний перебувати у формі під час несення служби.
+6.2 Поведінка повинна відповідати статусу ДБР.
+6.3 Заборонені дії, що дискредитують службу.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🚨 7. Дисциплінарні заходи
+
+7.1 Зауваження.
+7.2 Догана.
+7.3 Пониження у званні.
+7.4 Звільнення з ДБР.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📢 8. Прикінцеві положення
+
+8.1 Статут є обов’язковим для всіх співробітників ДБР.
+8.2 Незнання Статуту не звільняє від відповідальності.
+8.3 Зміни затверджуються старшим складом.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📅 Дата: 18.03.2026
+✍️ Підпис: І.Ч.</div>
+<div id="code" class="tab">📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+━━━━━━━━━━━━━━━━━━━━━━━
+📌 Загальні положення 📌
+Кодекс ДБР визначає моральні, етичні та професійні принципи, яких зобов’язаний дотримуватися кожен працівник ДБР під час виконання службових обов’язків.
+━━━━━━━━━━━━━━━━━━━━━━━
+⚖️ 1. Честь та гідність ⚖️
+1.1 🛡 Працівник ДБР зобов’язаний захищати честь та репутацію фракції.
+1.2 🤝 Кожен працівник повинен ставитися до колег, цивільних осіб та представників інших фракцій із повагою.
+1.3 🚫 Забороняється дискредитувати ДБР своїми діями або висловлюваннями.
+1.4 📢 Працівник повинен подавати приклад дисципліни та професіоналізму.
+━━━━━━━━━━━━━━━━━━━━━━━
+🎖 2. Службова етика 🎖
+2.1 📜 Працівник зобов’язаний дотримуватися Статуту, Конституції та Кодексу ДБР.
+2.2 ⚠️ Забороняється зловживати службовими повноваженнями.
+2.3 🚫 Забороняється використовувати службове становище для особистої вигоди.
+2.4 🤝 Працівник повинен допомагати колегам під час виконання службових обов’язків.
+━━━━━━━━━━━━━━━━━━━━━━━
+🏛 3. Відданість службі 🏛
+3.1 🎯 Інтереси ДБР мають ставитися вище особистих інтересів під час виконання службових обов’язків.
+3.2 📈 Працівник повинен прагнути до професійного розвитку та підвищення кваліфікації.
+3.3 🫡 Працівник зобов’язаний сумлінно виконувати накази керівництва.
+3.4 ⚖️ Усі працівники є рівними перед внутрішніми правилами ДБР незалежно від звання.
+━━━━━━━━━━━━━━━━━━━━━━━
+🔒 4. Конфіденційність 🔒
+4.1 📁 Забороняється розголошувати внутрішню інформацію ДБР без дозволу керівництва.
+4.2 📵 Забороняється передавати службові дані третім особам.
+4.3 🛡 Працівник зобов’язаний захищати службову інформацію від стороннього доступу.
+━━━━━━━━━━━━━━━━━━━━━━━
+📢 5. Відповідальність 📢
+5.1 ⚠️ За порушення Кодексу працівник може бути притягнутий до дисциплінарної відповідальності.
+5.2 📋 Кожен працівник несе особисту відповідальність за свої дії.
+5.3 ⚖️ Незнання положень Кодексу не звільняє від відповідальності.
+━━━━━━━━━━━━━━━━━━━━━━━
+📅 Дата затвердження: ..2026
+✍️ Підпис: І.Ч.</div>
+<div id="constitution" class="tab">⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+━━━━━━━━━━━━━━━━━━━━━━━
+📜 Розділ I. Основні засади 📜
+1.1 🏛 ДБР є незалежною організацією, що здійснює свою діяльність відповідно до внутрішніх нормативних документів.
+1.2 ⚖️ Конституція ДБР є основним внутрішнім документом фракції.
+1.3 📌 Статут, накази та інші документи ДБР не можуть суперечити Конституції ДБР.
+━━━━━━━━━━━━━━━━━━━━━━━
+👑 Розділ II. Повноваження керівництва 👑
+2.1 🎖 Глава ДБР є найвищою посадовою особою фракції.
+2.2 📋 Глава ДБР має право призначати та звільняти працівників.
+2.3 🛡 Глава ДБР має право вносити зміни до внутрішніх документів.
+2.4 🤝 Заступники Глави ДБР виконують обов’язки, покладені на них керівництвом.
+━━━━━━━━━━━━━━━━━━━━━━━
+👥 Розділ III. Права працівників 👥
+3.1 ⚖️ Кожен працівник має право на справедливе ставлення.
+3.2 📢 Кожен працівник має право подати скаргу на дії іншого працівника.
+3.3 📝 Кожен працівник має право оскаржити дисциплінарне покарання.
+3.4 🛡 Кожен працівник має право на захист своїх інтересів перед керівництвом.
+━━━━━━━━━━━━━━━━━━━━━━━
+📋 Розділ IV. Обов’язки працівників 📋
+4.1 📜 Дотримуватися Конституції, Статуту та Кодексу ДБР.
+4.2 🫡 Виконувати законні накази керівництва.
+4.3 🤝 Поважати інших працівників та підтримувати дисципліну.
+4.4 ⚠️ Не допускати дій, які можуть зашкодити репутації ДБР.
+━━━━━━━━━━━━━━━━━━━━━━━
+⚖️ Розділ V. Дисциплінарна відповідальність ⚖️
+5.1 📌 За порушення внутрішніх правил можуть застосовуватися дисциплінарні стягнення.
+5.2 ⚠️ Види покарань:
+• Усне попередження;
+• Догана;
+• Пониження у званні;
+• Тимчасове відсторонення;
+• Звільнення з ДБР.
+5.3 👑 Остаточне рішення щодо дисциплінарних заходів приймає керівництво ДБР.
+━━━━━━━━━━━━━━━━━━━━━━━
+📅 Дата затвердження: 07/06/2026
+✍️ Підпис: І.Ч.</div>
+
+<hr>
+
+<h3>Адмінка</h3>
+
+<input id="adminPass" placeholder="Пароль">
+<input id="target" placeholder="Користувач">
+<input id="amount" placeholder="DB">
+<input id="newRank" placeholder="Звання">
+
+<button onclick="giveDB()">DB</button>
+<button onclick="changeRank()">Rank</button>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>body{
 font-family:Arial;
 background:green;
-color:green;
+color:white;
 text-align:center;
 margin:0;
 transition:0.4s;
@@ -18,251 +226,63 @@ transition:0.4s;
 padding:10px;
 }
 
-.card{
-background:rgba(0,0,0,0.4);
-margin:10px;
+.tab{
+display:none;
 padding:10px;
+background:rgba(0,0,0,0.3);
+margin:10px;
 border-radius:10px;
 }
 
-.tab{
-display:none;
-}
-
 button{
-padding:10px;
+padding:8px;
 margin:5px;
 cursor:pointer;
-border-radius:6px;
-}
-
-#panel{
-display:none;
-}
-</style>.fade{
-animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-</head>
-
-<body>
-
-<h1>РП ПОРТАЛ ДБР</h1>
-
-<!-- AUTH -->
-<div id="auth" class="card">
-<h3>Реєстрація / Вхід</h3>
-
-<input id="username" placeholder="Ім'я"><br>
-<input id="rank" placeholder="Звання"><br>
-<input id="badge" placeholder="Жетон"><br>
-<input id="car" placeholder="Авто"><br>
-<input id="tg" placeholder="Telegram"><br>
-<input id="roblox" placeholder="Roblox"><br>
-<input id="password" type="password" placeholder="Пароль"><br>
-
-<button onclick="register()">Реєстрація</button>
-<button onclick="login()">Вхід</button>
-</div>
-
-<!-- PANEL -->
-<div id="panel">
-
-<h2>Профіль</h2>
-<div id="profile"></div>
-
-<h3>DB: <span id="db">0</span></h3>
-
-<hr>
-
-<button onclick="openTab('rules')">Статут</button>
-<button onclick="openTab('code')">Кодекс</button>
-<button onclick="openTab('constitution')">Конституція</button>
-<button onclick="openTab('points')">Бали</button>
-
-<div id="rules" class="tab"><div id="rules" class="tab">
-
-<h2>📕 СТАТУТ ДБР</h2>
-
-1. Загальні положення  
-Статут ДБР визначає порядок служби, обов’язки та поведінку співробітників.  
-Кожен співробітник зобов’язаний знати та дотримуватися цього Статуту.  
-Порушення Статуту тягне за собою дисциплінарну відповідальність.
-
-2. Субординація  
-Накази старшого складу є обов’язковими до виконання.  
-Обговорення наказів допускається лише у службовому порядку.  
-Неповага до старших за званням заборонена.
-
-3. Обов’язки  
-Дотримання законів, Конституції та RP правил.  
-Виконання наказів.  
-Підтримка дисципліни.
-
-4. Заборони  
-Перевищення повноважень.  
-Самовільні дії.  
-Порушення RP.  
-Образи.
-
-5. Права  
-Отримання наказів.  
-Скарги.  
-Звернення до керівництва.
-
-6. Форма  
-Обов’язкова форма під час служби.  
-Адекватна поведінка.
-
-7. Покарання  
-Попередження.  
-Догана.  
-Пониження.  
-Звільнення.
-
-</div>
-<div id="code" class="tab"><div id="code" class="tab">
-
-<h2>📘 КОДЕКС ДБР</h2>
-
-1. Честь і гідність  
-Заборонено дискредитувати ДБР.  
-Повага до всіх.
-
-2. Етика  
-Не використовувати посаду для вигоди.  
-Допомога колегам.
-
-3. Служба  
-Інтереси ДБР важливіші за особисті.  
-Виконання наказів.
-
-4. Конфіденційність  
-Не розголошувати інформацію.
-
-5. Відповідальність  
-Порушення карається.  
-Незнання не звільняє.
-
-</div>
-<div id="constitution" class="tab"><div id="constitution" class="tab">
-
-<h2>⚖️ КОНСТИТУЦІЯ ДБР</h2>
-
-1. Основи  
-ДБР — внутрішня організація.  
-Конституція головна.
-
-2. Керівництво  
-Глава має повну владу.  
-Призначення та звільнення.
-
-3. Права  
-Скарги.  
-Справедливість.  
-Оскарження.
-
-4. Обов’язки  
-Виконання правил.  
-Повага.  
-Служба.
-
-5. Покарання  
-Попередження.  
-Догана.  
-Звільнення.
-
-</div>
-<div id="points" class="tab"><div id="points" class="tab">
-
-<h2>📊 СИСТЕМА БАЛІВ</h2>
-
-<p>Тренування: +1</p>
-<p>Документи: +2</p>
-<p>Затримання: +2</p>
-<p>Операції: +3</p>
-
-<hr>
-
-<h3>АКТУАЛЬНИЙ СТАН</h3>
-
-<p>DB: <span id="db"></span></p>
-<p>Звання: <span id="rankShow"></span></p>
-
-</div>
-
-<hr>
-
-<div class="card">
-<h3>Адмінка</h3>
-
-<input id="adminPass" placeholder="Пароль"><br>
-<input id="target" placeholder="Користувач"><br>
-<input id="amount" placeholder="DB"><br>
-<input id="newRank" placeholder="Звання"><br>
-
-<button onclick="giveDB()">Дати DB</button>
-<button onclick="changeRank()">Змінити звання</button>
-</div>
-
-</div>
-
-</body>
-</html>let users = JSON.parse(localStorage.getItem("users") || "[]");
+}let users = JSON.parse(localStorage.getItem("users") || "[]");
 let user = null;
 
-// SAVE
 function save(){
 localStorage.setItem("users", JSON.stringify(users));
 }
 
-// FORM
+/* FORM */
 function getForm(){
 return{
-username: document.getElementById("username").value,
-rank: document.getElementById("rank").value,
-badge: document.getElementById("badge").value,
-car: document.getElementById("car").value,
-telegram: document.getElementById("tg").value,
-roblox: document.getElementById("roblox").value,
-password: document.getElementById("password").value
+username: username.value,
+rank: rank.value,
+badge: badge.value,
+car: car.value,
+telegram: tg.value,
+roblox: roblox.value,
+password: password.value
 };
 }
 
-// REGISTER
+/* REGISTER */
 function register(){
 
 let u = getForm();
 
+if(!u.username || !u.password){
+alert("Заповни поля");
+return;
+}
+
 if(users.find(x => x.username === u.username)){
-alert("Користувач вже існує");
+alert("Такий є");
 return;
 }
 
 u.db = 0;
 u.bg = "green";
 
-let users = JSON.parse(localStorage.getItem("users") || "[]");
-let user = null;
+users.push(u);
+save();
 
-function save(){
-localStorage.setItem("users", JSON.stringify(users));
+alert("OK");
 }
 
-alert("Реєстрація успішна");
-}
-
-// LOGIN
+/* LOGIN */
 function login(){
 
 let u = getForm();
@@ -273,46 +293,57 @@ x.password === u.password
 );
 
 if(!found){
-alert("Невірний логін або пароль");
+alert("Невірно");
 return;
 }
 
 user = found;
 
-document.getElementById("auth").style.display = "none";
-document.getElementById("panel").style.display = "block";
-
-document.body.style.background = user.bg;
+auth.style.display = "none";
+panel.style.display = "block";
 
 updateUI();
 }
 
-// PROFILE UI
+/* UI */
 function updateUI(){
 
 if(!user) return;
 
-document.getElementById("profile").innerHTML =
+profile.innerHTML =
 "Ім'я: " + user.username + "<br>" +
 "Звання: " + user.rank + "<br>" +
 "Жетон: " + user.badge + "<br>" +
-"Авто: " + user.car + "<br>" +
-"Telegram: " + user.telegram + "<br>" +
-"Roblox: " + user.roblox;
+"Авто: " + user.car;
 
-document.getElementById("db").innerText = user.db;
-
-// 👇 важливо для вкладки points
-let r = document.getElementById("rankShow");
-if(r) r.innerText = user.rank;
+db.innerText = user.db;
 
 document.body.style.background = user.bg;
-}function giveDB(){
 
-if(adminPass.value !== "DBR2026"){
-alert("Нема доступу");
+/* inject docs */
+document.getElementById("rules").innerHTML = "СТАТУТ: дисципліна, накази, правила";
+document.getElementById("code").innerHTML = "КОДЕКС: етика і поведінка";
+document.getElementById("constitution").innerHTML = "КОНСТИТУЦІЯ: основний закон";
+}
+
+/* BUY */
+function buy(color,price){
+
+if(!user) return;
+
+if(user.db < price){
+alert("Нема DB");
 return;
 }
+
+user.db -= price;
+user.bg = color;
+
+save();
+updateUI();
+}function giveDB(){
+
+if(adminPass.value !== "DBR2026") return;
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -321,21 +352,15 @@ t.db += Number(amount.value);
 
 save();
 
-// оновлення якщо це поточний юзер
 if(user && user.username === t.username){
 user.db = t.db;
 updateUI();
 }
-
-notify("DB видано");
 }
 
 function changeRank(){
 
-if(adminPass.value !== "DBR2026"){
-alert("Нема доступу");
-return;
-}
+if(adminPass.value !== "DBR2026") return;
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -348,74 +373,17 @@ if(user && user.username === t.username){
 user.rank = t.rank;
 updateUI();
 }
-
-notify("Звання змінено");
-}<button onclick="buy('blue',500)">Синій (500 DB)</button>
-<button onclick="buy('red',500)">Червоний (500 DB)</button>
-<button onclick="buy('orange',700)">Помаранчевий (700 DB)</button>
-<button onclick="buy('purple',900)">Фіолетовий (900 DB)</button>
-<button onclick="buy('black',1200)">Чорний (1200 DB)</button>
-<button onclick="buy('white',300)">Білий (300 DB)</button>
-<button onclick="buy('cyan',800)">Блакитний (800 DB)</button>
-<button onclick="buy('pink',600)">Рожевий (600 DB)</button>
-<button onclick="buy('gold',1000)">Золотий (1000 DB)</button>function buy(color,price){
-
-if(!user) return;
-
-if(user.db < price){
-notify("Недостатньо DB");
-return;
 }
 
-user.db -= price;
-user.bg = color;
-
-save();
-updateUI();
-
-document.body.style.background = color;
-
-notify("Куплено колір");
-}function notify(text){
-
-let n = document.createElement("div");
-
-n.innerText = text;
-
-n.style.position = "fixed";
-n.style.top = "20px";
-n.style.right = "20px";
-n.style.background = "rgba(0,0,0,0.8)";
-n.style.color = "white";
-n.style.padding = "10px";
-n.style.borderRadius = "8px";
-n.style.zIndex = "9999";
-
-document.body.appendChild(n);
-
-setTimeout(()=>{
-n.remove();
-},2000);
-
-}.fade{
-animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}window.onload = function(){
-
-document.getElementById("panel").style.display = "none";
+/* TABS SAFE */
+function openTab(id){
 
 document.querySelectorAll(".tab").forEach(t=>{
 t.style.display = "none";
 });
 
+let el = document.getElementById(id);
+if(!el) return;
+
+el.style.display = "block";
 }
