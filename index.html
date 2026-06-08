@@ -309,12 +309,10 @@ username:
 // REGISTER
 function register(){
 
-alert("Кнопка працює")
-
 let u = getForm();
 
 if(users.find(x => x.username === u.username)){
-alert("Користувач вже існує");
+alert("REGISTER WORKS");
 return;
 }
 
@@ -325,6 +323,14 @@ users.push(u);
 save();
 
 alert("Реєстрація успішна");
+
+function save(){
+  localStorage.setItem("users",
+                       JSON.stringify(users));
+}
+  let users =
+    JSON.parse(localStorage.getItem("users") || "[]");
+  let user = null;
 }
 
 // LOGIN
