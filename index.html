@@ -252,8 +252,12 @@ return;
 u.db = 0;
 u.bg = "green";
 
-users.push(u);
-save();
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+let user = null;
+
+function save(){
+localStorage.setItem("users", JSON.stringify(users));
+}
 
 alert("Реєстрація успішна");
 }
