@@ -2,56 +2,89 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>RP System</title>
-<link rel="stylesheet" href="style.css">
+<title>РП ПОРТАЛ ДБР</title>
+
+<style>
+body{
+font-family:Arial;
+background:green;
+color:white;
+text-align:center;
+margin:0;
+}
+
+input,button{
+padding:10px;
+margin:5px;
+width:80%;
+max-width:300px;
+}
+
+.card{
+background:rgba(0,0,0,0.3);
+padding:10px;
+margin:10px;
+border-radius:10px;
+}
+
+.hidden{display:none;}
+
+.tab{
+display:none;
+padding:10px;
+}
+
+.active{display:block;}
+</style>
 </head>
 
 <body>
 
-<div id="auth">
-<h2>Вхід / Реєстрація</h2>
+<h1>🚔 РП ПОРТАЛ ДБР</h1>
+
+<div id="auth" class="card">
+<h3>Реєстрація / Вхід</h3>
 
 <input id="username" placeholder="Ім'я">
 <input id="rank" placeholder="Звання">
 <input id="badge" placeholder="Жетон">
-<input id="car" placeholder="Авто">
+<input id="car" placeholder="Номер машини">
 <input id="tg" placeholder="Telegram">
-<input id="roblox" placeholder="Roblox">
+<input id="tgname" placeholder="Тг нік">
+<input id="roblox" placeholder="Roblox нік">
 <input id="password" type="password" placeholder="Пароль">
 
 <button onclick="register()">Реєстрація</button>
 <button onclick="login()">Вхід</button>
 </div>
 
-<div id="panel" style="display:none">
+<div id="panel" class="hidden">
 
-<h2>Профіль</h2>
-<div id="profile"></div>
-
+<h2>👤 Профіль</h2>
+<p id="info"></p>
 <h3>DB: <span id="db">0</span></h3>
 
-<hr>
-
-<h3>Магазин</h3>
-<button onclick="buy('blue',200)">Синій (500 DB)</button>
-<button onclick="buy('red',750)">Червоний (500 DB)</button>
-<button onclick="buy('purple',950)">Фіолетовий (900 DB)</button>
-<button onclick="buy('black',1200)">Чорний (1200 DB)</button>
-<button onclick="buy('white',350)">Білий (300 DB)</button>
-<button onclick="buy('cyan',400)">Блакитний (800 DB)</button>
-<button onclick="buy('pink',600)">Рожевий (600 DB)</button>
-<button onclick="buy('gold',2500)">Золотий (1000 DB)</button>
-<button onclick="buy('orange',800)">Помаранчевий</button>
-
+<button onclick="setBg('green')">Зелений</button>
+<button onclick="buy('blue',400)">Синій (400 DB)</button>
+<button onclick="buy('red',450)">Червоний (450 DB)</button>
+<button onclick="buy('orange',650)">Помаранчевий (650 DB)</button>
+<button onclick="buy('purple',800)">Фіолетовий (800 DB)</button>
+<button onclick="buy('black',1000)">Чорний (1000 DB)</button>
+<button onclick="buy('white',350)">Білий (350 DB)</button>
+<button onclick="buy('cyan',250)">Блакитний (250 DB)</button>
+<button onclick="buy('pink',500)">Рожевий (500 DB)</button>
+<button onclick="buy('gold',2500)">Золотий (2500 DB)</button>
 
 <hr>
 
-<h3>Документи</h3>
-<button onclick="openTab('rules')">Статут</button>
-<button onclick="openTab('code')">Кодекс</button>
-<button onclick="openTab('constitution')">Конституція</button>
-
-<div id="rules" class="tab">📕 СТАТУТ ДБР
+<button onclick="openTab('rules')">📕СТАТУТ ДБР</button>
+<button onclick="openTab('arrest')">🚔 Затримання</button>
+<button onclick="openTab('code')">📘 Кодекс</button>
+<button onclick="openTab('constitution')">⚖️ Конституція</button>
+<button onclick="openTab('admin')">👑 Адмін</button>
+<button onclick="openTab('rules')">ПРАВИЛА ДБР</button>
+  
+<div id="rules" class="tab active"> 📕 СТАТУТ ДБР
 
 ━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -124,6 +157,86 @@
 
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
+
+<div id="arrest" class="tab">🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
+
+Шановні співробітники ДБР ⚖️
+
+Під час затримання громадянина кожен співробітник зобов'язаний діяти відповідно до встановленого порядку та дотримуватися службової етики.
+
+━━━━━━━━━━━━━━━━━━━
+
+📌 ПОРЯДОК ЗАТРИМАННЯ
+
+Після затримання особи співробітник ДБР зобов'язаний:
+
+• Представитися 👤
+• Повідомити своє звання та посаду 🎖️
+• Зачитати права затриманого (Міранду) 📖
+• Повідомити статті, за якими здійснено затримання ⚖️
+• Надати коротке роз'яснення зазначених статей 📋
+
+━━━━━━━━━━━━━━━━━━━
+
+📄 ДОКУМЕНТАЦІЯ
+
+Після проведення затримання необхідно:
+
+• Заповнити протокол затримання 📝
+• Зафіксувати обставини події 📸
+• Внести всю необхідну інформацію до службової документації 📑
+
+Протокол може бути складений як у службовому транспорті 🚓, так і безпосередньо перед початком судового розгляду 🏛️.
+
+━━━━━━━━━━━━━━━━━━━
+
+🎥 ВІДЕОФІКСАЦІЯ
+
+Під час виконання службових обов'язків співробітник ДБР зобов'язаний вести відеофіксацію всіх важливих етапів затримання.
+
+Обов'язково повинно бути зафіксовано:
+
+• Момент вчинення порушення або наявність доказів порушення 🚨
+• Момент затримання особи 🚔
+• Проведення всіх процесуальних дій 📋
+• Зачитування прав затриманого (Міранди) 📖
+• Оголошення статей затримання та їх роз'яснення ⚖️
+• Передача затриманого до суду або відповідної установи 🏛️
+
+📌 Допускається ведення одного безперервного відеозапису, який охоплює всі етапи затримання та процесуальних дій.
+
+📌 За відсутності відеофіксації затримання може бути визнане недійсним, якщо неможливо підтвердити законність дій співробітника.
+
+📌 У разі технічних проблем рекомендується додатково робити скріншоти ключових моментів 📸.
+
+━━━━━━━━━━━━━━━━━━━
+
+🏛️ ПІД ЧАС СУДОВОГО РОЗГЛЯДУ
+
+Після прибуття до суду співробітник ДБР повторно зобов'язаний:
+
+• Представитися 👤
+• Повідомити своє звання 🎖️
+• Зачитати права затриманого (Міранду) 📖
+• Назвати статті затримання ⚖️
+• Надати їх роз'яснення 📋
+• Передати матеріали справи суду 📑
+
+━━━━━━━━━━━━━━━━━━━
+
+⚠️ ВАЖЛИВО
+
+• Заборонено порушувати права затриманих ❌
+• Заборонено використовувати образливі висловлювання ❌
+• Усі дії повинні бути обґрунтованими та зафіксованими 📸
+• Співробітник зобов'язаний зберігати спокій та професіоналізм 🛡️
+
+━━━━━━━━━━━━━━━━━━━
+
+⚖️ ДБР — Закон. Честь. Справедливість.
+
+"Професіоналізм співробітника визначається не лише затриманням, а й дотриманням закону під час його проведення."</div>
+
 <div id="code" class="tab">📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📌 Загальні положення 📌
@@ -159,6 +272,7 @@
 ━━━━━━━━━━━━━━━━━━━━━━━
 📅 Дата затвердження: ..2026
 ✍️ Підпис: І.Ч.</div>
+
 <div id="constitution" class="tab">⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📜 Розділ I. Основні засади 📜
@@ -196,194 +310,228 @@
 ━━━━━━━━━━━━━━━━━━━━━━━
 📅 Дата затвердження: 07/06/2026
 ✍️ Підпис: І.Ч.</div>
+<div id="rules" class="tab">📜 СТАТУТ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 
-<hr>
+━━━━━━━━━━━━━━━━━━━━━━━
 
-<h3>Адмінка</h3>
+📌 Загальні положення 📌
+Цей статут визначає правила поведінки, субординації, взаємодії та службових дій працівників ДБР. Усі працівники зобов’язані дотримуватися наведених положень.
 
-<input id="adminPass" placeholder="Пароль">
+━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 1. Поведінка з цивільними 👤
+
+1.1 🚫 Заборонено використовувати грубу або образливу лексику.
+1.2 ⚠️ Заборонено відповідати на образи цивільних — зберігайте професіоналізм.
+1.3 🔇 Після зачитування Міранди — не спілкуватися із затриманим.
+1.4 ❌ Заборонені будь-які образи затриманих.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🎥 2. Міранда та відеофіксація 🎥
+
+2.1 📖 Міранда зачитується строго за шаблоном.
+2.2 📹 Рекомендується вести відеозапис.
+2.3 📸 Якщо відео немає — робіть скріншоти важливих моментів.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🔫 3. Затримання та зброя 🔫
+
+🪪 Видається тимчасова ліцензія на зброю (анулюється після виходу з ДБР).
+
+3.1 🥊 Напад кулаками → тільки кийок.
+3.2 🔥 Вогонь по вам → дозволено ліквідувати ціль.
+3.3 ⚡️ Тайзер: пограбування / напад / неадекватність.
+3.4 ⛔️ Заборонено тайзер без причини або за 1–4 удари.
+3.5 📢 Обов’язково зачитати Міранду.
+3.6 🧘 Зберігати спокій.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🎖 4. Субординація 🎖
+
+4.1 📊 МПЗ виконують накази СПЗ.
+4.2 📝 Якщо наказ абсурдний — звернення в «Скарги».
+4.3 💬 Конфлікти — тільки в чаті ДБР або ЛС.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📘 5. Кодекс ДБР 📘
+
+5.1 ⚖️ Діяти чесно та відповідально.
+5.2 🤝 Поважати всіх.
+5.3 🚫 Не використовувати посаду для вигоди.
+5.4 🛡 Не псувати репутацію ДБР.
+5.5 📜 Дотримуватись правил.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+⚖️ 6. Конституція ДБР ⚖️
+
+6.1 🏛 Керівництво змінює правила.
+6.2 📌 Усі зобов’язані їх виконувати.
+6.3 ⚠️ Покарання: догана / пониження / звільнення.
+6.4 👑 Остаточне рішення — за керівництвом.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🤝 7. Інші фракції 🤝
+
+7.1 🚫 Інші фракції не дають вам накази.
+7.2 📞 Можете відмовити та викликати керівництво.
+7.3 ⚠️ НРП-зауваження — обов’язково реагувати.
+7.4 🚓 НПУ зупинили → зупиняєтесь.
+7.5 🏃 Під час погоні → можна ігнорувати.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+🆔 8. Нікнейми 🆔
+
+Формат: (Звання) ДБР || (нік)
+Приклад: Глава ДБР || ETOBLAT55
+
+Скорочення:
+СПЗ — старший за званням
+МПЗ — молодший за званням
+НПУ — поліція
+СБУ — безпека
+ДБР — розслідування
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📢 9. Додатково 📢
+
+🔔 Можливі зміни. Слідкуйте за новинами.
+
+━━━━━━━━━━━━━━━━━━━━━━━
+
+📅 Дата: 18.03.2026
+✍️ Підпис: І.Ч.</div>
+
+<div id="admin" class="tab card">
+<input id="adminPass" placeholder="Admin пароль">
 <input id="target" placeholder="Користувач">
 <input id="amount" placeholder="DB">
-<input id="newRank" placeholder="Звання">
-
-<button onclick="giveDB()">DB</button>
-<button onclick="changeRank()">Rank</button>
+<button onclick="giveDB()">Видати DB</button>
+</div>
 
 </div>
 
-<script src="app.js"></script>
-</body>
-</html>body{
-font-family:Arial;
-background:green;
-color:white;
-text-align:center;
-margin:0;
-transition:0.4s;
+<script>
+let user=null;
+
+function saveUsers(){
+localStorage.setItem("users",JSON.stringify(users));
 }
 
-#auth, #panel{
-padding:10px;
+function loadUsers(){
+return JSON.parse(localStorage.getItem("users")||"[]");
 }
 
-.tab{
-display:none;
-padding:10px;
-background:rgba(0,0,0,0.3);
-margin:10px;
-border-radius:10px;
-}
+let users=loadUsers();
 
-button{
-padding:8px;
-margin:5px;
-cursor:pointer;
-}let users = JSON.parse(localStorage.getItem("users") || "[]");
-let user = null;
-
-function save(){
-localStorage.setItem("users", JSON.stringify(users));
-}
-
-/* FORM */
-function getForm(){
-return{
-username: username.value,
-rank: rank.value,
-badge: badge.value,
-car: car.value,
-telegram: tg.value,
-roblox: roblox.value,
-password: password.value
-};
-}
-
-/* REGISTER */
+// REGISTER
 function register(){
+let u=getForm();
 
-let u = getForm();
-
-if(!u.username || !u.password){
-alert("Заповни поля");
+if(users.find(x=>x.username==u.username)){
+alert("Користувач існує");
 return;
 }
 
-if(users.find(x => x.username === u.username)){
-alert("Такий є");
-return;
-}
-
-u.db = 0;
-u.bg = "green";
-
+u.db=0;
+u.bg="green";
+  
 users.push(u);
-save();
+saveUsers();
 
 alert("OK");
 }
 
-/* LOGIN */
+// LOGIN
 function login(){
+let u=getForm();
 
-let u = getForm();
-
-let found = users.find(x =>
-x.username === u.username &&
-x.password === u.password
-);
+let found=users.find(x=>x.username==u.username && x.password==u.password);
 
 if(!found){
 alert("Невірно");
 return;
 }
 
-user = found;
+user=found;
 
-auth.style.display = "none";
-panel.style.display = "block";
+document.getElementById("auth").classList.add("hidden");
+document.getElementById("panel").classList.remove("hidden");
 
 updateUI();
+document.body.style.background=user.bg;
 }
 
-/* UI */
+// UI
 function updateUI(){
-
-if(!user) return;
-
-profile.innerHTML =
-"Ім'я: " + user.username + "<br>" +
-"Звання: " + user.rank + "<br>" +
-"Жетон: " + user.badge + "<br>" +
-"Авто: " + user.car;
-
-db.innerText = user.db;
-
-document.body.style.background = user.bg;
-
-/* inject docs */
-document.getElementById("rules").innerHTML = "СТАТУТ: дисципліна, накази, правила";
-document.getElementById("code").innerHTML = "КОДЕКС: етика і поведінка";
-document.getElementById("constitution").innerHTML = "КОНСТИТУЦІЯ: основний закон";
+info.innerText=user.username+" | "+user.rank;
+db.innerText=user.db;
 }
 
-/* BUY */
+// BUY
 function buy(color,price){
+if(user.db<price){alert("нема DB");return;}
 
-if(!user) return;
-
-if(user.db < price){
-alert("Нема DB");
-return;
+user.db-=price;
+user.bg=color;
+document.body.style.background=color;
+update();
 }
 
-user.db -= price;
-user.bg = color;
-
-save();
-updateUI();
-}function giveDB(){
-
-if(adminPass.value !== "DBR2026") return;
-
-let t = users.find(x => x.username === target.value);
-if(!t) return;
-
-t.db += Number(amount.value);
-
-save();
-
-if(user && user.username === t.username){
-user.db = t.db;
-updateUI();
-}
+// SET BG
+function setBg(c){
+user.bg=c;
+document.body.style.background=c;
+update();
 }
 
-function changeRank(){
+// ADMIN
+function giveDB(){
+if(adminPass.value!="DBR2026") return alert("no admin");
 
-if(adminPass.value !== "DBR2026") return;
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
 
-let t = users.find(x => x.username === target.value);
-if(!t) return;
+t.db+=Number(amount.value);
 
-t.rank = newRank.value;
-
-save();
-
-if(user && user.username === t.username){
-user.rank = t.rank;
+saveUsers();
+alert("OK");
 updateUI();
 }
+
+// SAVE
+function update(){
+saveUsers();
+updateUI();
 }
 
-/* TABS SAFE */
+// TABS
 function openTab(id){
-
-document.querySelectorAll(".tab").forEach(t=>{
-t.style.display = "none";
-});
-
-let el = document.getElementById(id);
-if(!el) return;
-
-el.style.display = "block";
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
+
+// FORM
+function getForm(){
+return{
+username:username.value,
+rank:rank.value,
+badge:badge.value,
+car:car.value,
+telegram:tg.value,
+tgname:tgname.value,
+roblox:roblox.value,
+password:password.value
+};
+}
+</script>
+
+</body>
+</html>
