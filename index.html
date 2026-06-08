@@ -93,6 +93,9 @@ text-align:left;
 
 <!-- PANEL -->
 <div id="panel" class="hidden">
+  .hidden{display:none;
+  }
+
 
 <h2>👤 Профіль</h2>
 
@@ -240,6 +243,8 @@ updateUI();
 // ADMIN GIVE DB
 function giveDB(){
 
+function giveDB(){
+
 if(adminPass.value !== "DBR2026"){
 alert("Нема доступу");
 return;
@@ -251,6 +256,13 @@ if(!t) return;
 t.db += Number(amount.value);
 
 save();
+
+// 🔥 ОНОВЛЕННЯ ЕКРАНУ
+if(user && user.username === t.username){
+user.db = t.db;
+updateUI();
+}
+
 alert("DB видано: +" + amount.value);
 }
 
@@ -268,24 +280,37 @@ if(!t) return;
 t.rank = newRank.value;
 
 save();
+
+// 🔥 ОНОВЛЕННЯ ЕКРАНУ
+if(user && user.username === t.username){
+user.rank = t.rank;
+updateUI();
+}
+
 alert("Звання змінено");
 }
 
 // TABS
 function openTab(id){
+  function openTab(id){
 
+// ховаємо всі вкладки
 document.querySelectorAll(".tab").forEach(t=>{
-t.classList.remove("active");
+t.style.display = "none";
 });
 
-document.getElementById(id).classList.add("active");
+// показуємо потрібну
+let el = document.getElementById(id);
+
+if(!el){
+alert("Немає вкладки: " + id);
+return;
 }
 
-</script>
-</html>
-<div id="rules" class="tab active">
-<div class="document">
-<pre>
+el.style.display = "block";
+}
+
+
 📕 СТАТУТ ДБР
 
 ━━━━━━━━━━━━━━━━━━━━━━━
