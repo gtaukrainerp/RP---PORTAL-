@@ -438,13 +438,28 @@ cursor:pointer;
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
 
-<div id="admin" class="tab card">
+<div id="admin" class="tab card"> 
+<button onclick="showProfile()">Показати профіль</button>
+
+<div id="playerProfile"></div>
+
+<input id="newRank" placeholder="Нове звання">
+<button onclick="changeRank()">Змінити звання</button>
+
 <input id="adminPass" placeholder="Admin пароль">
 <input id="target" placeholder="Користувач">
 <input id="amount" placeholder="DB">
 <button onclick="giveDB()">Видати DB</button>
-</div>
 
+<hr>
+
+<button onclick="showProfile()">Показати профіль</button>
+
+<div id="playerProfile"></div>
+
+<input id="newRank" placeholder="Нове звання">
+<button onclick="changeRank()">Змінити звання</button>
+</div>
 </div>
 
 <script>
@@ -506,7 +521,6 @@ if(fresh){
     user = fresh;
 }
 
-function updateUI(){
 document.getElementById("info").innerHTML = 
 <b>Ім'я:</b> ${user.username}<br>
 <b>Звання:</b> ${user.rank}<br>
@@ -518,11 +532,6 @@ document.getElementById("info").innerHTML =
 ;
 
 document.getElementById("db").innerText = user.db;
-}
-
-document.getElementById("db").innerText =
-    user.db;
-}
 }
 
 // BUY
@@ -556,12 +565,6 @@ alert("OK");
 updateUI();
 }
   
-<button onclick="showProfile()">Показати профіль</button>
-
-<div id="playerProfile"></div>
-
-<input id="newRank" placeholder="Нове звання">
-<button onclick="changeRank()">Змінити звання</button>
 
 // SAVE
 function update(){
@@ -588,7 +591,7 @@ roblox:roblox.value,
 password:password.value
 };
 }
-</script>function showProfile(){
+  function showProfile(){
 if(adminPass.value!="DBR2026") return alert("no admin");
 
 let t = users.find(x => x.username == target.value);
@@ -612,7 +615,7 @@ document.getElementById("playerProfile").innerHTML =
 ;
 }
 
-  function changeRank(){
+function changeRank(){
 if(adminPass.value != "DBR2026")
     return alert("no admin");
 
@@ -626,7 +629,7 @@ t.rank = newRank.value;
 saveUsers();
 
 alert("Звання змінено");
-}
-
+}  
+</script>
 </body>
 </html>
