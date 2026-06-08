@@ -114,9 +114,8 @@ cursor:pointer;
 <button onclick="openTab('constitution')">⚖️ Конституція</button>
 <button onclick="openTab('admin')">👑 Адмін</button>
   
-<div id="rules" class="tab"
-  .tab {
-  white-space: pre-line;
+<div id="rules" class="tab active"
+
 }> 📕 СТАТУТ ДБР
 
 ━━━━━━━━━━━━━━━━━━━━━━━
@@ -190,8 +189,7 @@ cursor:pointer;
 
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
-<div id="arrest" class="tab" .tab {
-  white-space: pre-line;
+<div id="arrest" class="tab active" 
 }>🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
 
 Шановні співробітники ДБР ⚖️
@@ -271,8 +269,7 @@ cursor:pointer;
 
 "Професіоналізм співробітника визначається не лише затриманням, а й дотриманням закону під час його проведення."</div>
 
-<div id="code" class="tab" .tab {
-  white-space: pre-line;
+<div id="code" class="tab active" 
 }>📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📌 Загальні положення 📌
@@ -309,8 +306,7 @@ cursor:pointer;
 📅 Дата затвердження: ..2026
 ✍️ Підпис: І.Ч.</div>
 
-<div id="constitution" class="tab" .tab {
-  white-space: pre-line;
+<div id="constitution" class="tab active" 
 }>⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📜 Розділ I. Основні засади 📜
@@ -348,8 +344,7 @@ cursor:pointer;
 ━━━━━━━━━━━━━━━━━━━━━━━
 📅 Дата затвердження: 07/06/2026
 ✍️ Підпис: І.Ч.</div>
-<div id="rules" class="tab" .tab {
-  white-space: pre-line;
+<div id="rules" class="tab active" 
 }>📜 СТАТУТ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 
 ━━━━━━━━━━━━━━━━━━━━━━━
@@ -537,7 +532,7 @@ document.getElementById("info").innerHTML =
 <b>ТГ Нік:</b> ${user.tgname}<br>
 <b>Roblox:</b> ${user.roblox}
 ;
-
+  
 document.getElementById("db").innerText = user.db;
 }
 
