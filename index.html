@@ -2,126 +2,240 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>РП ПОРТАЛ ДБР</title>
+<title>РП Портал ДБР</title>
 
 <style>
 body{
 font-family:Arial;
 background:green;
-color:white;
+color:green;
 text-align:center;
 margin:0;
-transition:0.5s;
+transition:0.4s;
 }
 
-.hidden{display:none;}
+#auth, #panel{
+padding:10px;
+}
 
 .card{
 background:rgba(0,0,0,0.4);
-padding:10px;
 margin:10px;
+padding:10px;
 border-radius:10px;
 }
 
-.tab{display:none;}
+.tab{
+display:none;
+}
 
 button{
 padding:10px;
 margin:5px;
 cursor:pointer;
+border-radius:6px;
 }
 
 #panel{
 display:none;
 }
-
-.fade{
-animation: fadeIn 0.5s ease-in;
+</style>.fade{
+animation: fadeIn 0.3s ease-in;
 }
 
 @keyframes fadeIn{
-from{opacity:0; transform:translateY(10px);}
-to{opacity:1; transform:translateY(0);}
+from{
+opacity:0;
+transform:translateY(10px);
 }
-</style>
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 </head>
 
 <body>
 
-<h1>🚔 РП ПОРТАЛ ДБР</h1>
+<h1>РП ПОРТАЛ ДБР</h1>
 
 <!-- AUTH -->
 <div id="auth" class="card">
 <h3>Реєстрація / Вхід</h3>
 
-<input id="username" placeholder="Ім'я">
-<input id="rank" placeholder="Звання">
-<input id="badge" placeholder="Жетон">
-<input id="car" placeholder="Авто">
-<input id="tg" placeholder="Telegram">
-<input id="roblox" placeholder="Roblox">
-<input id="password" type="password" placeholder="Пароль">
+<input id="username" placeholder="Ім'я"><br>
+<input id="rank" placeholder="Звання"><br>
+<input id="badge" placeholder="Жетон"><br>
+<input id="car" placeholder="Авто"><br>
+<input id="tg" placeholder="Telegram"><br>
+<input id="roblox" placeholder="Roblox"><br>
+<input id="password" type="password" placeholder="Пароль"><br>
 
 <button onclick="register()">Реєстрація</button>
 <button onclick="login()">Вхід</button>
 </div>
 
 <!-- PANEL -->
-<div id="panel" class="card fade">
+<div id="panel">
 
-<h2>👤 Профіль</h2>
+<h2>Профіль</h2>
 <div id="profile"></div>
 
-<h3>💰 DB: <span id="db">0</span></h3>
-
-<button onclick="setBg('green')">Зелений</button>
-<button onclick="buy('blue',500)">Синій 500</button>
-<button onclick="buy('red',500)">Червоний 500</button>
+<h3>DB: <span id="db">0</span></h3>
 
 <hr>
 
-<button onclick="openTab('rules')">📕 Статут</button>
-<button onclick="openTab('code')">📘 Кодекс</button>
-<button onclick="openTab('constitution')">⚖️ Конституція</button>
-<button onclick="openTab('points')">📊 Бали</button>
+<button onclick="openTab('rules')">Статут</button>
+<button onclick="openTab('code')">Кодекс</button>
+<button onclick="openTab('constitution')">Конституція</button>
+<button onclick="openTab('points')">Бали</button>
 
-<div id="rules" class="tab">📕 СТАТУТ ДБР...</div>
-<div id="code" class="tab">📘 КОДЕКС ДБР...</div>
-<div id="constitution" class="tab">⚖️ КОНСТИТУЦІЯ ДБР...</div>
-<div id="points" class="tab">📊 СИСТЕМА БАЛІВ...</div>
+<div id="rules" class="tab"><div id="rules" class="tab">
+
+<h2>📕 СТАТУТ ДБР</h2>
+
+1. Загальні положення  
+Статут ДБР визначає порядок служби, обов’язки та поведінку співробітників.  
+Кожен співробітник зобов’язаний знати та дотримуватися цього Статуту.  
+Порушення Статуту тягне за собою дисциплінарну відповідальність.
+
+2. Субординація  
+Накази старшого складу є обов’язковими до виконання.  
+Обговорення наказів допускається лише у службовому порядку.  
+Неповага до старших за званням заборонена.
+
+3. Обов’язки  
+Дотримання законів, Конституції та RP правил.  
+Виконання наказів.  
+Підтримка дисципліни.
+
+4. Заборони  
+Перевищення повноважень.  
+Самовільні дії.  
+Порушення RP.  
+Образи.
+
+5. Права  
+Отримання наказів.  
+Скарги.  
+Звернення до керівництва.
+
+6. Форма  
+Обов’язкова форма під час служби.  
+Адекватна поведінка.
+
+7. Покарання  
+Попередження.  
+Догана.  
+Пониження.  
+Звільнення.
+
+</div>
+<div id="code" class="tab"><div id="code" class="tab">
+
+<h2>📘 КОДЕКС ДБР</h2>
+
+1. Честь і гідність  
+Заборонено дискредитувати ДБР.  
+Повага до всіх.
+
+2. Етика  
+Не використовувати посаду для вигоди.  
+Допомога колегам.
+
+3. Служба  
+Інтереси ДБР важливіші за особисті.  
+Виконання наказів.
+
+4. Конфіденційність  
+Не розголошувати інформацію.
+
+5. Відповідальність  
+Порушення карається.  
+Незнання не звільняє.
+
+</div>
+<div id="constitution" class="tab"><div id="constitution" class="tab">
+
+<h2>⚖️ КОНСТИТУЦІЯ ДБР</h2>
+
+1. Основи  
+ДБР — внутрішня організація.  
+Конституція головна.
+
+2. Керівництво  
+Глава має повну владу.  
+Призначення та звільнення.
+
+3. Права  
+Скарги.  
+Справедливість.  
+Оскарження.
+
+4. Обов’язки  
+Виконання правил.  
+Повага.  
+Служба.
+
+5. Покарання  
+Попередження.  
+Догана.  
+Звільнення.
+
+</div>
+<div id="points" class="tab"><div id="points" class="tab">
+
+<h2>📊 СИСТЕМА БАЛІВ</h2>
+
+<p>Тренування: +1</p>
+<p>Документи: +2</p>
+<p>Затримання: +2</p>
+<p>Операції: +3</p>
 
 <hr>
 
-<!-- ADMIN -->
+<h3>АКТУАЛЬНИЙ СТАН</h3>
+
+<p>DB: <span id="db"></span></p>
+<p>Звання: <span id="rankShow"></span></p>
+
+</div>
+
+<hr>
+
 <div class="card">
-<h3>👑 Адмінка</h3>
+<h3>Адмінка</h3>
 
-<input id="adminPass" placeholder="Пароль">
-<input id="target" placeholder="Користувач">
-<input id="amount" placeholder="DB">
-<input id="newRank" placeholder="Звання">
+<input id="adminPass" placeholder="Пароль"><br>
+<input id="target" placeholder="Користувач"><br>
+<input id="amount" placeholder="DB"><br>
+<input id="newRank" placeholder="Звання"><br>
 
-<button onclick="giveDB()">+DB</button>
-<button onclick="changeRank()">Звання</button>
+<button onclick="giveDB()">Дати DB</button>
+<button onclick="changeRank()">Змінити звання</button>
 </div>
 
 </div>
-let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+</body>
+</html>let users = JSON.parse(localStorage.getItem("users") || "[]");
 let user = null;
 
+// SAVE
 function save(){
 localStorage.setItem("users", JSON.stringify(users));
 }
 
+// FORM
 function getForm(){
 return{
-username: username.value,
-rank: rank.value,
-badge: badge.value,
-car: car.value,
-telegram: tg.value,
-roblox: roblox.value,
-password: password.value
+username: document.getElementById("username").value,
+rank: document.getElementById("rank").value,
+badge: document.getElementById("badge").value,
+car: document.getElementById("car").value,
+telegram: document.getElementById("tg").value,
+roblox: document.getElementById("roblox").value,
+password: document.getElementById("password").value
 };
 }
 
@@ -131,7 +245,7 @@ function register(){
 let u = getForm();
 
 if(users.find(x => x.username === u.username)){
-alert("Такий є");
+alert("Користувач вже існує");
 return;
 }
 
@@ -141,7 +255,7 @@ u.bg = "green";
 users.push(u);
 save();
 
-alert("Реєстрація OK");
+alert("Реєстрація успішна");
 }
 
 // LOGIN
@@ -155,53 +269,46 @@ x.password === u.password
 );
 
 if(!found){
-alert("Невірний логін");
+alert("Невірний логін або пароль");
 return;
 }
 
 user = found;
 
-auth.style.display = "none";
-panel.style.display = "block";
+document.getElementById("auth").style.display = "none";
+document.getElementById("panel").style.display = "block";
+
+document.body.style.background = user.bg;
 
 updateUI();
-document.body.style.background = user.bg;
 }
 
-// UI
+// PROFILE UI
 function updateUI(){
-
-profile.innerHTML =
-"👤 " + user.username + "<br>" +
-"🎖 " + user.rank + "<br>" +
-"🪪 " + user.badge + "<br>" +
-"🚓 " + user.car;
-
-db.innerText = user.db;
-document.body.style.background = user.bg;
-}
-
-// BUY COLORS
-function buy(color,price){
 
 if(!user) return;
 
-if(user.db < price){
-alert("Нема DB");
+document.getElementById("profile").innerHTML =
+"Ім'я: " + user.username + "<br>" +
+"Звання: " + user.rank + "<br>" +
+"Жетон: " + user.badge + "<br>" +
+"Авто: " + user.car + "<br>" +
+"Telegram: " + user.telegram + "<br>" +
+"Roblox: " + user.roblox;
+
+document.getElementById("db").innerText = user.db;
+
+// 👇 важливо для вкладки points
+let r = document.getElementById("rankShow");
+if(r) r.innerText = user.rank;
+
+document.body.style.background = user.bg;
+}function giveDB(){
+
+if(adminPass.value !== "DBR2026"){
+alert("Нема доступу");
 return;
 }
-
-user.db -= price;
-user.bg = color;
-
-save();
-updateUI();
-}
-
-// ADMIN DB
-function giveDB(){
-
-if(adminPass.value !== "DBR2026") return;
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -210,18 +317,21 @@ t.db += Number(amount.value);
 
 save();
 
+// оновлення якщо це поточний юзер
 if(user && user.username === t.username){
 user.db = t.db;
 updateUI();
 }
 
-alert("DB видано");
+notify("DB видано");
 }
 
-// ADMIN RANK
 function changeRank(){
 
-if(adminPass.value !== "DBR2026") return;
+if(adminPass.value !== "DBR2026"){
+alert("Нема доступу");
+return;
+}
 
 let t = users.find(x => x.username === target.value);
 if(!t) return;
@@ -235,26 +345,73 @@ user.rank = t.rank;
 updateUI();
 }
 
-alert("Звання змінено");
+notify("Звання змінено");
+}<button onclick="buy('blue',500)">Синій (500 DB)</button>
+<button onclick="buy('red',500)">Червоний (500 DB)</button>
+<button onclick="buy('orange',700)">Помаранчевий (700 DB)</button>
+<button onclick="buy('purple',900)">Фіолетовий (900 DB)</button>
+<button onclick="buy('black',1200)">Чорний (1200 DB)</button>
+<button onclick="buy('white',300)">Білий (300 DB)</button>
+<button onclick="buy('cyan',800)">Блакитний (800 DB)</button>
+<button onclick="buy('pink',600)">Рожевий (600 DB)</button>
+<button onclick="buy('gold',1000)">Золотий (1000 DB)</button>function buy(color,price){
+
+if(!user) return;
+
+if(user.db < price){
+notify("Недостатньо DB");
+return;
 }
-// TABS
-function openTab(id){
+
+user.db -= price;
+user.bg = color;
+
+save();
+updateUI();
+
+document.body.style.background = color;
+
+notify("Куплено колір");
+}function notify(text){
+
+let n = document.createElement("div");
+
+n.innerText = text;
+
+n.style.position = "fixed";
+n.style.top = "20px";
+n.style.right = "20px";
+n.style.background = "rgba(0,0,0,0.8)";
+n.style.color = "white";
+n.style.padding = "10px";
+n.style.borderRadius = "8px";
+n.style.zIndex = "9999";
+
+document.body.appendChild(n);
+
+setTimeout(()=>{
+n.remove();
+},2000);
+
+}.fade{
+animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}window.onload = function(){
+
+document.getElementById("panel").style.display = "none";
 
 document.querySelectorAll(".tab").forEach(t=>{
 t.style.display = "none";
 });
 
-let el = document.getElementById(id);
-
-if(!el){
-alert("Нема вкладки: " + id);
-return;
 }
-
-el.style.display = "block";
-}
-
-// старт: нічого не видно до входу
-window.onload = function(){
-panel.style.display = "none";
-}  
