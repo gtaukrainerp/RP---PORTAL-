@@ -35,6 +35,38 @@ padding:10px;
 }
 
 .active{display:block;}
+</style><style>
+body{
+font-family:Arial;
+background:green;
+color:white;
+text-align:center;
+margin:0;
+transition:0.4s;
+}
+
+#auth, #panel{
+padding:10px;
+}
+
+.tab{
+display:none;
+opacity:0;
+transform:translateY(10px);
+transition:0.3s;
+}
+
+.tab.active{
+display:block;
+opacity:1;
+transform:translateY(0);
+}
+
+button{
+padding:8px;
+margin:5px;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -76,12 +108,11 @@ padding:10px;
 <button onclick="buy('gold',2500)">Золотий (2500 DB)</button>
 
 <hr>
-<button onclick="openTab('regulations')">📕СТАТУТ ДБР</button>
+<button onclick="openTab('rules')">📕СТАТУТ ДБР</button>
 <button onclick="openTab('arrest')">🚔 Затримання</button>
 <button onclick="openTab('code')">📘 Кодекс</button>
 <button onclick="openTab('constitution')">⚖️ Конституція</button>
 <button onclick="openTab('admin')">👑 Адмін</button>
-<button onclick="openTab('rules')">ПРАВИЛА ДБР</button>
   
 <div id="rules" class="tab active"> 📕 СТАТУТ ДБР
 
@@ -156,7 +187,6 @@ padding:10px;
 
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
-
 <div id="arrest" class="tab">🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
 
 Шановні співробітники ДБР ⚖️
