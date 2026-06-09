@@ -114,9 +114,8 @@ cursor:pointer;
 <button onclick="openTab('constitution')">⚖️ Конституція</button>
 <button onclick="openTab('admin')">👑 Адмін</button>
   
-<div id="rules" class="tab active"
-
-}> 📕 СТАТУТ ДБР
+<div id="rules" class="tab active"> 
+📕 СТАТУТ ДБР
 
 ━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -189,8 +188,8 @@ cursor:pointer;
 
 📅 Дата: 18.03.2026
 ✍️ Підпис: І.Ч.</div>
-<div id="arrest" class="tab active" 
-}>🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
+<div id="arrest" class="tab active" >
+🚔 | ІНФОРМАЦІЯ ПРО ЗАТРИМАННЯ
 
 Шановні співробітники ДБР ⚖️
 
@@ -269,8 +268,8 @@ cursor:pointer;
 
 "Професіоналізм співробітника визначається не лише затриманням, а й дотриманням закону під час його проведення."</div>
 
-<div id="code" class="tab active" 
-}>📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+<div id="code" class="tab active" > 
+📘 КОДЕКС ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📌 Загальні положення 📌
 Кодекс ДБР визначає моральні, етичні та професійні принципи, яких зобов’язаний дотримуватися кожен працівник ДБР під час виконання службових обов’язків.
@@ -306,8 +305,8 @@ cursor:pointer;
 📅 Дата затвердження: ..2026
 ✍️ Підпис: І.Ч.</div>
 
-<div id="constitution" class="tab active" 
-}>⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
+<div id="constitution" class="tab active" >
+⚖️ КОНСТИТУЦІЯ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 ━━━━━━━━━━━━━━━━━━━━━━━
 📜 Розділ I. Основні засади 📜
 1.1 🏛 ДБР є незалежною організацією, що здійснює свою діяльність відповідно до внутрішніх нормативних документів.
@@ -344,7 +343,7 @@ cursor:pointer;
 ━━━━━━━━━━━━━━━━━━━━━━━
 📅 Дата затвердження: 07/06/2026
 ✍️ Підпис: І.Ч.</div>
-<div id="rules" class="tab active" 
+<div id="rule" class="tab active" 
 }>📜 СТАТУТ ДЕРЖАВНОГО БЮРО РОЗСЛІДУВАНЬ (ДБР)
 
 ━━━━━━━━━━━━━━━━━━━━━━━
@@ -530,21 +529,19 @@ document.getElementById("info").innerHTML =
 <b>Машина:</b> ${user.car}<br>
 <b>Telegram:</b> ${user.telegram}<br>
 <b>ТГ Нік:</b> ${user.tgname}<br>
-<b>Roblox:</b> ${user.roblox}
+<b>Roblox:</b> ${user.roblox} 
 ;
   
 document.getElementById("db").innerText = user.db;
 }
 
 // BUY
-function buy(color,price){
-if(user.db<price){alert("нема DB");return;}
+let index = users.findIndex(x => x.username == user.username);
 
-user.db-=price;
-user.bg=color;
-document.body.style.background=color;
-update();
-}
+users[index].db = user.db;
+users[index].bg = color;
+
+saveUsers();
 
 // SET BG
 function setBg(c){
