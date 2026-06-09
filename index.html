@@ -1,314 +1,110 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-<meta charset="UTF-8">
-<title>РП ПОРТАЛ ДБР</title>
-
-<style>
-body{
-font-family:Arial;
-background:green;
-color:white;
-text-align:center;
-margin:0;
-}
-
-input,button{
-padding:10px;
-margin:5px;
-width:80%;
-max-width:300px;
-}
-
-.card{
-background:rgba(0,0,0,0.3);
-padding:10px;
-margin:10px;
-border-radius:10px;
-}
-
-.hidden{display:none;}
-
-.tab{
-display:none;
-padding:10px;
-}
-
-.active{display:block;}
-</style>
-</head>
-
-<body>
-
-<h1>🚔 РП ПОРТАЛ ДБР</h1>
-
-<div id="auth" class="card">
-<h3>Реєстрація / Вхід</h3>
-
-<input id="username" placeholder="Ім'я">
-<input id="rank" placeholder="Звання">
-<input id="badge" placeholder="Жетон">
-<input id="car" placeholder="Номер машини">
-<input id="tg" placeholder="Telegram">
-<input id="tgname" placeholder="Тг нік">
-<input id="roblox" placeholder="Roblox нік">
-<input id="password" type="password" placeholder="Пароль">
-
-<button onclick="register()">Реєстрація</button>
-<button onclick="login()">Вхід</button>
-</div>
-
-<div id="panel" class="hidden">
-
-<h2>👤 Профіль</h2>
-<p id="info"></p>
-<h3>DB: <span id="db">0</span></h3>
-
-<button onclick="setBg('green')">Зелений</button>
-<button onclick="buy('blue',500)">Синій 500</button>
-<button onclick="buy('red',500)">Червоний 500</button>
-<button onclick="buy('gold',1000)">Золотий 1000</button>
-
-<hr>
-
-<button onclick="openTab('rules')">📕 Правила</button>
-<button onclick="openTab('arrest')">🚔 Затримання</button>
-<button onclick="openTab('code')">📘 Кодекс</button>
-<button onclick="openTab('constitution')">⚖️ Конституція</button>
-<button onclick="openTab('admin')">👑 Адмін</button>
-
-<div id="rules" class="tab active">📕 СТАТУТ ДБР... (встав текст якщо хочеш)</div>
-
-<div id="arrest" class="tab">🚔 Інформація про затримання...</div>
-
-<div id="code" class="tab">📘 Кодекс ДБР...</div>
-
-<div id="constitution" class="tab">⚖️ Конституція ДБР...</div>
-
-<div id="admin" class="tab card">
-
-<h3>👑 Адмін Панель</h3>
-
-<input id="adminPass" placeholder="Admin пароль">
-
-<hr>
-
-<h4>Видати DB</h4>
-<input id="target" placeholder="Користувач">
-<input id="amount" placeholder="DB">
-<button onclick="giveDB()">Видати DB</button>
-
-<hr>
-
-<h4>Змінити звання</h4>
-<input id="rankUser" placeholder="Користувач">
-<input id="newRank" placeholder="Нове звання">
-<button onclick="changeRank()">Змінити звання</button>
-
-<hr>
-
-<h4>Усі зареєстровані гравці</h4>
-
-<div id="playersList"></div>
-
-</div>
-
-</div>
-
-<script>
-let user=null;
-
-function saveUsers(){
-localStorage.setItem("users",JSON.stringify(users));
-}
-
-function loadUsers(){
-return JSON.parse(localStorage.getItem("users")||"[]");
-}
-
-let users=loadUsers();
-
-// REGISTER
-function register(){
-let u=getForm();
-
-if(users.find(x=>x.username==u.username)){
-alert("Користувач існує");
-return;
-}
-
-u.db=0;
-u.bg="green";
-
-users.push(u);
-saveUsers();
-
-alert("OK");
-}
-
-// LOGIN
-function login(){
-let u=getForm();
-
-let found=users.find(x=>x.username==u.username && x.password==u.password);
-
-if(!found){
-alert("Невірно");
-return;
-}
-
-user=found;
-
-document.getElementById("auth").classList.add("hidden");
-document.getElementById("panel").classList.remove("hidden");
-
-updateUI();
-document.body.style.background=user.bg;
-}
-
-// UI
-function updateUI(){
-info.innerText=user.username+" | "+user.rank;
-db.innerText=user.db;
-}
-
-// BUY
-function buy(color,price){
-if(user.db<price){alert("нема DB");return;}
-
-user.db-=price;
-user.bg=color;
-document.body.style.background=color;
-update();
-}
-
-// SET BG
-function setBg(c){
-user.bg=c;
-document.body.style.background=c;
-update();
-}
-
-// ADMIN
-function giveDB(){
-
-    if(!checkAdmin()){
-        alert("Немає доступу");
-        return;
-    }
-
-    let t = users.find(x=>x.username==target.value);
-
-    if(!t){
-        alert("Гравця не знайдено");
-        return;
-    }
-
-    t.db += Number(amount.value);
-
-    saveUsers();
-
-    if(user && user.username === t.username){
-        user.db = t.db;
-        updateUI();
-    }
-
-    loadPlayers();
-
-    alert("DB видано");
-}
-
-// SAVE
-function update(){
-saveUsers();
-updateUI();
-}
-
-// TABS
-function openTab(id){
-
-    document.querySelectorAll(".tab")
-    .forEach(t=>t.classList.remove("active"));
-
-    document.getElementById(id)
-    .classList.add("active");
-
-    if(id==="admin"){
-        loadPlayers();
-    }
-}
-
-// FORM
-function getForm(){
-return{
-username:username.value,
-rank:rank.value,
-badge:badge.value,
-car:car.value,
-telegram:tg.value,
-tgname:tgname.value,
-roblox:roblox.value,
-password:password.value
+rank: document.getElementById("rank").value,
+badge: document.getElementById("badge").value,
+car: document.getElementById("car").value,
+telegram: document.getElementById("tg").value,
+tgname: document.getElementById("tgname").value,
+roblox: document.getElementById("roblox").value,
+password: document.getElementById("password").value
 };
 }
-</script>
- function checkAdmin(){
-    return adminPass.value === "DBR2026";
+
+// ADMIN CHECK
+function checkAdmin(){
+return document.getElementById("adminPass").value === "DBR2026";
 }
 
+// GIVE DB
+function giveDB(){
+
+if(!checkAdmin()){
+alert("Немає доступу");
+return;
+}
+
+let t = users.find(x =>
+x.username === document.getElementById("target").value
+);
+
+if(!t){
+alert("Гравця не знайдено");
+return;
+}
+
+t.db += Number(document.getElementById("amount").value);
+
+saveUsers();
+loadPlayers();
+}
+
+// CHANGE RANK
 function changeRank(){
 
-    if(!checkAdmin()){
-        alert("Немає доступу");
-        return;
-    }
-
-    let t = users.find(x=>x.username===rankUser.value);
-
-    if(!t){
-        alert("Гравця не знайдено");
-        return;
-    }
-
-    t.rank = newRank.value;
-
-    saveUsers();
-
-    if(user && user.username === t.username){
-        user.rank = newRank.value;
-        updateUI();
-    }
-
-    loadPlayers();
-
-    alert("Звання змінено");
+if(!checkAdmin()){
+alert("Немає доступу");
+return;
 }
 
+let t = users.find(x =>
+x.username === document.getElementById("rankUser").value
+);
+
+if(!t){
+alert("Гравця не знайдено");
+return;
+}
+
+t.rank = document.getElementById("newRank").value;
+
+saveUsers();
+loadPlayers();
+}
+
+// PLAYERS LIST
 function loadPlayers(){
 
-    if(!checkAdmin()) return;
+let html = "";
 
-    let html = "";
+users.forEach(u => {
+html += 
+<div class="card">
+<b>${u.username}</b><br>
+Звання: ${u.rank}<br>
+DB: ${u.db}<br>
+</div>
+;
+});
 
-    users.forEach(u=>{
-        html += 
-        <div class="card">
-            <b>${u.username}</b><br>
-            Звання: ${u.rank}<br>
-            Жетон: ${u.badge}<br>
-            Машина: ${u.car}<br>
-            Telegram: ${u.telegram}<br>
-            ТГ Нік: ${u.tgname}<br>
-            Roblox: ${u.roblox}<br>
-            DB: ${u.db}
-        </div>
-        ;
-    });
+document.getElementById("playersList").innerHTML = html;
+}
 
-    playersList.innerHTML = html;
-}   
-    
+// PROFILE SEARCH
+function showProfile(){
+
+let name = document.getElementById("searchUser").value;
+
+let u = users.find(x => x.username === name);
+
+if(!u){
+document.getElementById("profileResult").innerHTML =
+"❌ Гравця не знайдено";
+return;
+}
+
+document.getElementById("profileResult").innerHTML = 
+<div class="card">
+<b>👤 ${u.username}</b><br>
+Звання: ${u.rank}<br>
+Жетон: ${u.badge}<br>
+Машина: ${u.car}<br>
+Telegram: ${u.telegram}<br>
+ТГ Нік: ${u.tgname}<br>
+Roblox: ${u.roblox}<br>
+DB: ${u.db}
+</div>
+;
+}
+
 </script>
-    
+
 </body>
 </html>
