@@ -1,107 +1,87 @@
-rank: document.getElementById("rank").value,
-badge: document.getElementById("badge").value,
-car: document.getElementById("car").value,
-telegram: document.getElementById("tg").value,
-tgname: document.getElementById("tgname").value,
-roblox: document.getElementById("roblox").value,
-password: document.getElementById("password").value
-};
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>РП ПОРТАЛ ДБР</title>
+
+<style>
+body{
+font-family:Arial;
+background:green;
+color:white;
+text-align:center;
+margin:0;
 }
 
-// ADMIN CHECK
-function checkAdmin(){
-return document.getElementById("adminPass").value === "DBR2026";
+.card{
+padding:10px;
+margin:10px;
+background:rgba(0,0,0,0.3);
+border-radius:10px;
 }
 
-// GIVE DB
-function giveDB(){
-
-if(!checkAdmin()){
-alert("Немає доступу");
-return;
+input,button{
+padding:10px;
+margin:5px;
+width:80%;
+max-width:300px;
 }
+.hidden{display:none;}
+</style>
+</head>
 
-let t = users.find(x =>
-x.username === document.getElementById("target").value
-);
+<body>
 
-if(!t){
-alert("Гравця не знайдено");
-return;
-}
+<h1>🚔 РП ПОРТАЛ ДБР</h1>
 
-t.db += Number(document.getElementById("amount").value);
-
-saveUsers();
-loadPlayers();
-}
-
-// CHANGE RANK
-function changeRank(){
-
-if(!checkAdmin()){
-alert("Немає доступу");
-return;
-}
-
-let t = users.find(x =>
-x.username === document.getElementById("rankUser").value
-);
-
-if(!t){
-alert("Гравця не знайдено");
-return;
-}
-
-t.rank = document.getElementById("newRank").value;
-
-saveUsers();
-loadPlayers();
-}
-
-// PLAYERS LIST
-function loadPlayers(){
-
-let html = "";
-
-users.forEach(u => {
-html += 
-<div class="card">
-<b>${u.username}</b><br>
-Звання: ${u.rank}<br>
-DB: ${u.db}<br>
+<div id="auth" class="card">
+<h3>Вхід</h3>
+<input id="username" placeholder="Нік">
+<input id="password" type="password" placeholder="Пароль">
+<button onclick="login()">Вхід</button>
 </div>
-;
-});
 
-document.getElementById("playersList").innerHTML = html;
+<div id="panel" class="hidden">
+
+<h2>Профіль</h2>
+<p id="info"></p>
+<h3>DB: <span id="db"></span></h3>
+
+<button onclick="logout()">Вийти</button>
+
+</div>
+
+<script>
+
+let user = null;
+let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+function save(){
+localStorage.setItem("users", JSON.stringify(users));
 }
 
-// PROFILE SEARCH
-function showProfile(){
+function login(){
+let u = document.getElementById("username").value;
+let p = document.getElementById("password").value;
 
-let name = document.getElementById("searchUser").value;
+let found = users.find(x => x.username === u && x.password === p);
 
-let u = users.find(x => x.username === name);
-
-if(!u){
-document.getElementById("profileResult").innerHTML =
-"❌ Гравця не знайдено";
+if(!found){
+alert("Невірно");
 return;
 }
 
-document.getElementById("profileResult").innerHTML = 
-<div class="card">
-<b>👤 ${u.username}</b><br>
-Звання: ${u.rank}<br>
-Жетон: ${u.badge}<br>
-Машина: ${u.car}<br>
-Telegram: ${u.telegram}<br>
-ТГ Нік: ${u.tgname}<br>
-Roblox: ${u.roblox}<br>
-DB: ${u.db}
-</div>
-;
+user = found;
+
+document.getElementById("auth").classList.add("hidden");
+document.getElementById("panel").classList.remove("hidden");
+
+document.getElementById("info").innerText = user.username;
+document.getElementById("db").innerText = user.db;
+}
+
+function logout(){
+location.reload();
 }
 
 </script>
