@@ -1,1 +1,213 @@
-fack
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>РП ПОРТАЛ ДБР</title>
+
+<style>
+body{
+font-family:Arial;
+background:green;
+color:white;
+text-align:center;
+margin:0;
+}
+
+input,button{
+padding:10px;
+margin:5px;
+width:80%;
+max-width:300px;
+}
+
+.card{
+background:rgba(0,0,0,0.3);
+padding:10px;
+margin:10px;
+border-radius:10px;
+}
+
+.hidden{display:none;}
+
+.tab{
+display:none;
+padding:10px;
+}
+
+.active{display:block;}
+</style>
+</head>
+
+<body>
+
+<h1>🚔 РП ПОРТАЛ ДБР</h1>
+
+<div id="auth" class="card">
+<h3>Реєстрація / Вхід</h3>
+
+<input id="username" placeholder="Ім'я">
+<input id="rank" placeholder="Звання">
+<input id="badge" placeholder="Жетон">
+<input id="car" placeholder="Номер машини">
+<input id="tg" placeholder="Telegram">
+<input id="tgname" placeholder="Тг нік">
+<input id="roblox" placeholder="Roblox нік">
+<input id="password" type="password" placeholder="Пароль">
+
+<button onclick="register()">Реєстрація</button>
+<button onclick="login()">Вхід</button>
+</div>
+
+<div id="panel" class="hidden">
+
+<h2>👤 Профіль</h2>
+<p id="info"></p>
+<h3>DB: <span id="db">0</span></h3>
+
+<button onclick="setBg('green')">Зелений</button>
+<button onclick="buy('blue',500)">Синій 500</button>
+<button onclick="buy('red',500)">Червоний 500</button>
+<button onclick="buy('gold',1000)">Золотий 1000</button>
+
+<hr>
+
+<button onclick="openTab('rules')">📕 Правила</button>
+<button onclick="openTab('arrest')">🚔 Затримання</button>
+<button onclick="openTab('code')">📘 Кодекс</button>
+<button onclick="openTab('constitution')">⚖️ Конституція</button>
+<button onclick="openTab('admin')">👑 Адмін</button>
+
+<div id="rules" class="tab active">📕 СТАТУТ ДБР... (встав текст якщо хочеш)</div>
+
+<div id="arrest" class="tab">🚔 Інформація про затримання...</div>
+
+<div id="code" class="tab">📘 Кодекс ДБР...</div>
+
+<div id="constitution" class="tab">⚖️ Конституція ДБР...</div>
+
+<div id="admin" class="tab card">
+<input id="adminPass" placeholder="Admin пароль">
+<input id="target" placeholder="Користувач">
+<input id="amount" placeholder="DB">
+<button onclick="giveDB()">Видати DB</button>
+</div>
+
+</div>
+
+<script>
+let user=null;
+
+function saveUsers(){
+localStorage.setItem("users",JSON.stringify(users));
+}
+
+function loadUsers(){
+return JSON.parse(localStorage.getItem("users")||"[]");
+}
+
+let users=loadUsers();
+
+// REGISTER
+function register(){
+let u=getForm();
+
+if(users.find(x=>x.username==u.username)){
+alert("Користувач існує");
+return;
+}
+
+u.db=0;
+u.bg="green";
+
+users.push(u);
+saveUsers();
+
+alert("OK");
+}
+
+// LOGIN
+function login(){
+let u=getForm();
+
+let found=users.find(x=>x.username==u.username && x.password==u.password);
+
+if(!found){
+alert("Невірно");
+return;
+}
+
+user=found;
+
+document.getElementById("auth").classList.add("hidden");
+document.getElementById("panel").classList.remove("hidden");
+
+updateUI();
+document.body.style.background=user.bg;
+}
+
+// UI
+function updateUI(){
+info.innerText=user.username+" | "+user.rank;
+db.innerText=user.db;
+}
+
+// BUY
+function buy(color,price){
+if(user.db<price){alert("нема DB");return;}
+
+user.db-=price;
+user.bg=color;
+document.body.style.background=color;
+update();
+}
+
+// SET BG
+function setBg(c){
+user.bg=c;
+document.body.style.background=c;
+update();
+}
+
+// ADMIN
+function giveDB(){
+if(adminPass.value!="DBR2026") return alert("no admin");
+
+let t=users.find(x=>x.username==target.value);
+if(!t)return;
+
+t.db+=Number(amount.value);
+
+saveUsers();
+alert("OK");
+updateUI();
+}
+
+// SAVE
+function update(){
+saveUsers();
+updateUI();
+}
+
+// TABS
+function openTab(id){
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+// FORM
+function getForm(){
+return{
+username:username.value,
+rank:rank.value,
+badge:badge.value,
+car:car.value,
+telegram:tg.value,
+tgname:tgname.value,
+roblox:roblox.value,
+password:password.value
+};
+}
+</script>
+
+</body>
+</html>
