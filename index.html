@@ -1,213 +1,466 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<title>РП ПОРТАЛ ДБР</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РП ПОРТАЛ НПУ</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-body{
-font-family:Arial;
-background:green;
-color:white;
-text-align:center;
-margin:0;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1f3f 0%, #1a4d7a 50%, #0d2d52 100%);
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-input,button{
-padding:10px;
-margin:5px;
-width:80%;
-max-width:300px;
-}
+        /* Розмитий синій фон ефект */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.1) 0%, transparent 70%);
+            animation: glow 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.card{
-background:rgba(0,0,0,0.3);
-padding:10px;
-margin:10px;
-border-radius:10px;
-}
+        @keyframes glow {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px);
+            }
+        }
 
-.hidden{display:none;}
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 500px;
+        }
 
-.tab{
-display:none;
-padding:10px;
-}
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-.active{display:block;}
-</style>
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(100, 200, 255, 0.8);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card {
+            background: rgba(15, 35, 65, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            color: #64c8ff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(100, 200, 255, 0.4);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #64c8ff;
+            background: rgba(100, 200, 255, 0.15);
+            box-shadow: 0 0 10px rgba(100, 200, 255, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #1a7fbf 0%, #0d5a8f 100%);
+            color: #fff;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(26, 127, 191, 0.4);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2a9fcf 0%, #1d7aaf 100%);
+            box-shadow: 0 6px 20px rgba(100, 200, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .panel-section {
+            margin-bottom: 30px;
+        }
+
+        .panel-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            color: #64c8ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(100, 200, 255, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #64c8ff;
+        }
+
+        .user-info p {
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        .tabs-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #1a7fbf 0%, #0d5a8f 100%);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-button:hover {
+            background: linear-gradient(135deg, #2a9fcf 0%, #1d7aaf 100%);
+            box-shadow: 0 4px 15px rgba(100, 200, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #64c8ff 0%, #3a9fbf 100%);
+            box-shadow: 0 0 20px rgba(100, 200, 255, 0.8);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .tab-content {
+            background: rgba(100, 200, 255, 0.1);
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            min-height: 200px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #8f1a1a 0%, #5f0d0d 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #af2a2a 0%, #7f1d1d 100%);
+            box-shadow: 0 4px 15px rgba(200, 50, 50, 0.4);
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid rgba(100, 200, 255, 0.2);
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .tabs-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="container">
+        <!-- РЕЄСТРАЦІЯ / ВХІД -->
+        <div id="authSection" class="card auth-section">
+            <div class="header">
+                <h1>🚔 РП ПОРТАЛ НПУ</h1>
+                <p>Національна Поліція України</p>
+            </div>
 
-<h1>🚔 РП ПОРТАЛ ДБР</h1>
+            <h2>Вхід до системи</h2>
 
-<div id="auth" class="card">
-<h3>Реєстрація / Вхід</h3>
+            <div class="form-group">
+                <input id="username" placeholder="Ім'я користувача" type="text">
+            </div>
 
-<input id="username" placeholder="Ім'я">
-<input id="rank" placeholder="Звання">
-<input id="badge" placeholder="Жетон">
-<input id="car" placeholder="Номер машини">
-<input id="tg" placeholder="Telegram">
-<input id="tgname" placeholder="Тг нік">
-<input id="roblox" placeholder="Roblox нік">
-<input id="password" type="password" placeholder="Пароль">
+            <div class="form-group">
+                <input id="password" placeholder="Пароль" type="password">
+            </div>
 
-<button onclick="register()">Реєстрація</button>
-<button onclick="login()">Вхід</button>
-</div>
+            <div class="button-group">
+                <button onclick="register()">Реєстрація</button>
+                <button onclick="login()">Вхід</button>
+            </div>
+        </div>
 
-<div id="panel" class="hidden">
+        <!-- ПАНЕЛЬ КОРИСТУВАЧА -->
+        <div id="panelSection" class="hidden">
+            <div class="card">
+                <div class="header">
+                    <h1>🚔 РП ПОРТАЛ НПУ</h1>
+                </div>
 
-<h2>👤 Профіль</h2>
-<p id="info"></p>
-<h3>DB: <span id="db">0</span></h3>
+                <div class="user-info">
+                    <p>👤 <strong id="userDisplay"></strong></p>
+                </div>
 
-<button onclick="setBg('green')">Зелений</button>
-<button onclick="buy('blue',500)">Синій 500</button>
-<button onclick="buy('red',500)">Червоний 500</button>
-<button onclick="buy('gold',1000)">Золотий 1000</button>
+                <div class="panel-section">
+                    <h2>Інформація</h2>
+                    <div class="tabs-buttons">
+                        <button class="tab-button active" onclick="openTab('rules', this)">📕 Статут</button>
+                        <button class="tab-button" onclick="openTab('arrest', this)">🚔 Затримання</button>
+                        <button class="tab-button" onclick="openTab('code', this)">📘 Кодекс</button>
+                        <button class="tab-button" onclick="openTab('constitution', this)">⚖️ Конституція</button>
+                    </div>
 
-<hr>
+                    <div id="rules" class="tab-content active">
+                        <h3>📕 СТАТУТ НПУ</h3>
+                        <p>Вставте текст статуту тут...</p>
+                    </div>
 
-<button onclick="openTab('rules')">📕 Правила</button>
-<button onclick="openTab('arrest')">🚔 Затримання</button>
-<button onclick="openTab('code')">📘 Кодекс</button>
-<button onclick="openTab('constitution')">⚖️ Конституція</button>
-<button onclick="openTab('admin')">👑 Адмін</button>
+                    <div id="arrest" class="tab-content">
+                        <h3>🚔 Інформація про затримання</h3>
+                        <p>Вставте інформацію про затримання тут...</p>
+                    </div>
 
-<div id="rules" class="tab active">📕 СТАТУТ ДБР... (встав текст якщо хочеш)</div>
+                    <div id="code" class="tab-content">
+                        <h3>📘 Кодекс НПУ</h3>
+                        <p>Вставте текст кодексу тут...</p>
+                    </div>
 
-<div id="arrest" class="tab">🚔 Інформація про затримання...</div>
+                    <div id="constitution" class="tab-content">
+                        <h3>⚖️ Конституція НПУ</h3>
+                        <p>Вставте текст конституції тут...</p>
+                    </div>
+                </div>
 
-<div id="code" class="tab">📘 Кодекс ДБР...</div>
+                <button class="logout-btn" onclick="logout()">Вийти</button>
+            </div>
+        </div>
+    </div>
 
-<div id="constitution" class="tab">⚖️ Конституція ДБР...</div>
+    <script>
+        let user = null;
 
-<div id="admin" class="tab card">
-<input id="adminPass" placeholder="Admin пароль">
-<input id="target" placeholder="Користувач">
-<input id="amount" placeholder="DB">
-<button onclick="giveDB()">Видати DB</button>
-</div>
+        function saveUsers() {
+            localStorage.setItem("users", JSON.stringify(users));
+        }
 
-</div>
+        function loadUsers() {
+            return JSON.parse(localStorage.getItem("users") || "[]");
+        }
 
-<script>
-let user=null;
+        let users = loadUsers();
 
-function saveUsers(){
-localStorage.setItem("users",JSON.stringify(users));
-}
+        // РЕЄСТРАЦІЯ
+        function register() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
 
-function loadUsers(){
-return JSON.parse(localStorage.getItem("users")||"[]");
-}
+            if (!username || !password) {
+                alert("Заповніть усі поля!");
+                return;
+            }
 
-let users=loadUsers();
+            if (users.find(x => x.username === username)) {
+                alert("Користувач з таким ім'ям вже існує!");
+                return;
+            }
 
-// REGISTER
-function register(){
-let u=getForm();
+            users.push({ username, password });
+            saveUsers();
+            alert("✅ Реєстрація успішна! Тепер увійдіть.");
+            clearForm();
+        }
 
-if(users.find(x=>x.username==u.username)){
-alert("Користувач існує");
-return;
-}
+        // ВХІД
+        function login() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
 
-u.db=0;
-u.bg="green";
+            if (!username || !password) {
+                alert("Заповніть усі поля!");
+                return;
+            }
 
-users.push(u);
-saveUsers();
+            const found = users.find(x => x.username === username && x.password === password);
 
-alert("OK");
-}
+            if (!found) {
+                alert("❌ Невірне ім'я або пароль!");
+                return;
+            }
 
-// LOGIN
-function login(){
-let u=getForm();
+            user = found;
+            showPanel();
+        }
 
-let found=users.find(x=>x.username==u.username && x.password==u.password);
+        // ПОКАЗАТИ ПАНЕЛЬ
+        function showPanel() {
+            document.getElementById("authSection").classList.add("hidden");
+            document.getElementById("panelSection").classList.remove("hidden");
+            document.getElementById("userDisplay").textContent = user.username;
+        }
 
-if(!found){
-alert("Невірно");
-return;
-}
+        // ВИЙТИ
+        function logout() {
+            user = null;
+            document.getElementById("panelSection").classList.add("hidden");
+            document.getElementById("authSection").classList.remove("hidden");
+            clearForm();
+        }
 
-user=found;
+        // ОЧИСТИТИ ФОРМУ
+        function clearForm() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
 
-document.getElementById("auth").classList.add("hidden");
-document.getElementById("panel").classList.remove("hidden");
+        // ВІДКРИТИ ТАБ
+        function openTab(tabId, button) {
+            // Приховати всі таби
+            document.querySelectorAll(".tab-content").forEach(tab => {
+                tab.classList.remove("active");
+            });
 
-updateUI();
-document.body.style.background=user.bg;
-}
+            // Прибрати активний клас з усіх кнопок
+            document.querySelectorAll(".tab-button").forEach(btn => {
+                btn.classList.remove("active");
+            });
 
-// UI
-function updateUI(){
-info.innerText=user.username+" | "+user.rank;
-db.innerText=user.db;
-}
+            // Показати вибраний таб
+            document.getElementById(tabId).classList.add("active");
 
-// BUY
-function buy(color,price){
-if(user.db<price){alert("нема DB");return;}
-
-user.db-=price;
-user.bg=color;
-document.body.style.background=color;
-update();
-}
-
-// SET BG
-function setBg(c){
-user.bg=c;
-document.body.style.background=c;
-update();
-}
-
-// ADMIN
-function giveDB(){
-if(adminPass.value!="DBR2026") return alert("no admin");
-
-let t=users.find(x=>x.username==target.value);
-if(!t)return;
-
-t.db+=Number(amount.value);
-
-saveUsers();
-alert("OK");
-updateUI();
-}
-
-// SAVE
-function update(){
-saveUsers();
-updateUI();
-}
-
-// TABS
-function openTab(id){
-document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-// FORM
-function getForm(){
-return{
-username:username.value,
-rank:rank.value,
-badge:badge.value,
-car:car.value,
-telegram:tg.value,
-tgname:tgname.value,
-roblox:roblox.value,
-password:password.value
-};
-}
-</script>
-
+            // Активувати кнопку
+            button.classList.add("active");
+        }
+    </script>
 </body>
 </html>
